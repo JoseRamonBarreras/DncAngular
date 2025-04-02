@@ -1,0 +1,29 @@
+<p-card header="Iniciar Sesión" subheader="Ingresa tu correo y password" [style]="{ maxWidth: '500px', margin: '0 auto'}"
+    fxLayoutAlign="center center">
+
+    <div class="flex gap-3 mt-1">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%;">
+            <div style="margin-bottom: 25px;">
+                <p-floatLabel>
+                    <input type="text" pInputText id="email" formControlName="email"  style="width: 100%;"/>
+                    <label for="email">Email</label>
+                </p-floatLabel>
+            </div>
+      
+            <div style="margin-bottom: 25px;">
+            <p-floatLabel>
+                <input type="password" pInputText id="password" formControlName="password" style="width: 100%;"/>
+                <label for="password">Password</label>
+            </p-floatLabel>
+            </div>
+
+            <p-button type="submit" label="Login" class="w-full" styleClass="w-full"/>
+
+            <div style="margin-top: 25px;" *ngIf="loading">
+                <p-progressBar mode="indeterminate" [style]="{'height': '6px'}" />
+            </div>
+            
+        </form>
+    </div>
+
+</p-card>

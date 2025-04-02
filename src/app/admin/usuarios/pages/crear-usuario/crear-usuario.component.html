@@ -1,0 +1,56 @@
+<div class="card flex justify-content-center">
+    <p-dialog header="Crear Usuario" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '80rem', minHeight: '30rem' }" (onHide)="cancelar()">
+
+        <form [formGroup]="userForm" (ngSubmit)="guardar()">
+            <div class="grid" style="margin-bottom: 10px;">
+       
+                <div class="col">
+                    <p-inputGroup>
+                        <p-inputGroupAddon>Nombre</p-inputGroupAddon>
+                        <input type="text" pInputText placeholder="Nombre" formControlName="Nombre" />
+                    </p-inputGroup>
+                </div>
+                <div class="col">
+                    <p-inputGroup>
+                        <p-inputGroupAddon>Mascota Favorita</p-inputGroupAddon>
+                        <input type="text" pInputText placeholder="FavoritePet" formControlName="FavoritePet" />
+                    </p-inputGroup>
+                </div>
+            </div>
+
+
+            <div class="grid" style="margin-bottom: 10px;">
+                <div class="col-3">
+                    <p-dropdown formControlName="Roles" [options]="roles" optionLabel="rol"
+                        placeholder="Selecciona un Rol"/>
+                </div>
+                <div class="col">
+                    <p-inputGroup>
+                        <p-inputGroupAddon>Correo</p-inputGroupAddon>
+                        <input type="text" pInputText formControlName="Correo" />
+                    </p-inputGroup>
+                </div>
+                <div class="col">
+                    <p-inputGroup>
+                        <p-inputGroupAddon>Password</p-inputGroupAddon>
+                        <input type="text" pInputText formControlName="Password" />
+                    </p-inputGroup>
+                </div>
+                
+            </div>
+
+            <div class="grid" style="margin-bottom: 10px;">
+                <div class="col" style="display: flex; justify-content: flex-end;">
+                    <p-button label="Cancelar" severity="secondary" (click)="cancelar()" [style]="{marginRight: '10px'}"/>
+                    <p-button type="submit" label="Guardar" severity="success" [disabled]="!userForm.valid"/>
+                </div>
+            </div>
+           
+            <div style="margin-top: 25px;" *ngIf="loading">
+                <p-progressBar mode="indeterminate" [style]="{'height': '6px'}" />
+            </div>
+
+        </form>
+    </p-dialog>
+</div>

@@ -1,0 +1,10 @@
+
+<p-menubar [model]="menuItems" class="custom-menubar">
+    <ng-template pTemplate="start">
+      <img [src]="logo" alt="Logo" class="logo" style="max-width: 40px;"/>
+    </ng-template>
+  
+    <ng-template pTemplate="end">
+      <p-splitButton label="Usuario" icon="pi pi-user" [model]="userMenu"></p-splitButton>
+    </ng-template>
+  </p-menubar>

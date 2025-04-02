@@ -1,0 +1,55 @@
+<p-card styleClass="custom-card">
+    <ng-template pTemplate="header">
+        <div class="card-header">
+            <span class="card-title">Usuarios</span>
+            <p-button label="Crear" severity="success" (onClick)="crear()" />
+        </div>
+    </ng-template>
+
+    <p-table #dt2 dataKey="id" [value]="users" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+        [globalFilterFields]="['name', 'email']" [tableStyle]="{ 'min-width': '50rem' }">
+
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+
+                <p-iconField iconPosition="left" class="ml-auto">
+                    <p-inputIcon>
+                        <i class="pi pi-search"></i>
+                    </p-inputIcon>
+                    <input pInputText type="text" (input)="onFilter($event)" placeholder="Search keyword" />
+                </p-iconField>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Mascota Favorita</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles[0].rol }}</td>
+                <td>{{ user.profile.favorite_pet }}</td>
+                <td>
+                    <p-button label="Editar" icon="pi pi-user-edit" severity="warning" size="small"
+                        class="custom-button" (onClick)="editar(user)" />
+                    <p-button label="Password" icon="pi pi-key" severity="help" size="small" class="custom-button"
+                        (onClick)="cambiarPassword(user)" />
+                    <p-button label="Eliminar" icon="pi pi-user-minus" severity="danger" size="small"
+                        class="custom-button" (onClick)="eliminar(user)" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-card>
+
+<app-crear-usuario *ngIf="displayCrear"></app-crear-usuario>
+<app-editar-usuario *ngIf="displayEditar"></app-editar-usuario>
+<app-cambiar-password *ngIf="displayCambiarPassword"></app-cambiar-password>
