@@ -4,4 +4,6 @@ export class MascotaModel {
     birthday!: string;
     phone!: number;
     user_id!: number;
+    especie_id!: number;
+    foto?: string;
 }

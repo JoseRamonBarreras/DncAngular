@@ -18,6 +18,8 @@ export class ListarMascotasComponent {
   displayEditar: boolean = false;
   mascota!: MascotaModel;
   @ViewChild('dt2') dt2!: Table;
+  fotoDemo!: string;
+  baseUrl = 'http://127.0.0.1:8000/storage/mascotas/';
 
   constructor(
     private mascotaService: MascotaService,
@@ -28,6 +30,7 @@ export class ListarMascotasComponent {
   }
 
   ngOnInit(): void {
+    this.fotoDemo = "./img/icons/petdemo.png";
     this.getMascotasList();
     this.listeners();
   }
@@ -41,7 +44,7 @@ export class ListarMascotasComponent {
     this.listener = this.stateService.currentAccion.subscribe((accion: any) => {
       console.log(accion);
       this.displayCrear = accion.displayCrear;
-      this.displayEditar = accion.displayEditar;
+     
       if (accion.guardado) {
         this.getMascotasList();
       }
@@ -56,35 +59,33 @@ export class ListarMascotasComponent {
   }
 
   crear() {
+    this.sharedMascota.set(new MascotaModel());  // Pasamos un objeto vacío para crear
     this.displayCrear = true;
   }
 
-  editar(mascota: any) {
-    // this.usuarioService.getUser(user.id).subscribe(resp => {
-    //   this.user = new UsuarioModel();
-    //   this.user = resp;
-    //   this.displayEditar = true;
-    //   this.sharedUsuario.set(this.user);
-    // });
+  editar(mascota: MascotaModel) {
+    this.sharedMascota.set(mascota);  // Aquí pasas la mascota seleccionada a través del servicio
+    this.displayCrear = true;
   }
 
-  eliminar(usuario: any) {
-    // Swal.fire({
-    //   title: 'Eliminar usuario: ' + usuario.name,
-    //   text: "Desea continuar?",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#ef4444',
-    //   cancelButtonColor: '#64748b',
-    //   confirmButtonText: 'Eliminar',
-    //   cancelButtonText: 'Cancelar',
-    //   allowOutsideClick: false
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.usuarioService.deleteUser(usuario.id).subscribe(resp => {
-    //       this.getUsuariosList();
-    //     }, error => error);
-    //   }
-    // });
+  eliminar(mascota: any) {
+    Swal.fire({
+      title: 'Eliminar mascota: ' + mascota.name,
+      text: "Desea continuar?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#64748b',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.mascotaService.delete(mascota.id).subscribe(resp => {
+          console.log('Delete FromBackend', resp);
+          this.getMascotasList();
+        }, error => error);
+      }
+    });
   }
 }

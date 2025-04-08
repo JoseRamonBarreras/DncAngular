@@ -1,1 +1,141 @@
-<p>crear-mascota works!</p>
+<div class="card">
+    <p-dialog header="Agregar Mascota" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '100rem', minHeight: '30rem' }" (onHide)="cancelar()">
+
+        <div class="grid">
+            <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+            <div class="col-6">
+                <form [formGroup]="mascotaForm" (ngSubmit)="guardar()">
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12">
+                            <label for="foto" style="margin-right: 10px; min-width: 140px;">Foto de la mascota
+                                (opcional):</label>
+                        </div>
+                        <div class="col-12" style="display: flex; align-items: center;">
+                            <div class="image-preview-container" style="margin-right: 10px;">
+                                <img *ngIf="imagenPreview" [src]="imagenPreview" alt="Imagen Previa"
+                                    style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                                <img *ngIf="!imagenPreview" [src]="fotoDemo" alt="Imagen Previa"
+                                    style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                            </div>
+
+                            <input id="foto" type="file" formControlName="Foto" (change)="onFileChange($event)"
+                                accept="image/*" style="display: inline-block;" />
+                        </div>
+                    </div>
+
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>Nombre</p-inputGroupAddon>
+                                <input type="text" pInputText placeholder="Nombre" formControlName="Nombre" />
+                            </p-inputGroup>
+                        </div>
+                        <div class="col">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>Cumpleaños</p-inputGroupAddon>
+                                <input type="date" pInputText placeholder="Birthday" formControlName="Birthday" />
+                            </p-inputGroup>
+                        </div>
+                    </div>
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <div class="p-field">
+                                <label for="especie">Especie</label>
+                                <p-dropdown id="especie" [options]="especies" optionLabel="especie" optionValue="id"
+                                    formControlName="Especie" placeholder="Selecciona una especie">
+                                </p-dropdown>
+
+
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>Telefono</p-inputGroupAddon>
+                                <input type="number" pInputText placeholder="Telefono" formControlName="Telefono" />
+                            </p-inputGroup>
+                            <small class="text-muted">Teléfono de contacto. (opcional)</small>
+                        </div>
+                    </div>
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button label="Cancelar" severity="secondary" (click)="cancelar()" />
+                            <p-button type="submit" label="Guardar" severity="success"
+                                [disabled]="!mascotaForm.valid" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+            </div>
+
+            <!-- COLUMNA DERECHA: PREVIEW QR Y DATOS -->
+            <div class="col-6">
+                <p-card [style]="{ width: '360px' }">
+                    <ng-template pTemplate="header">
+                        <div class="text-center">
+                            <img *ngIf="!isEditMode" alt="Foto de Mascota"
+                                [src]="imagenPreview ? imagenPreview : './img/icons/petdemo.png'"
+                                style="width: 150px; height: 150px; object-fit: cover;" />
+                                
+                            <img *ngIf="isEditMode" alt="Foto de Mascota"
+                                [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'"
+                                style="width: 150px; height: 150px; object-fit: cover;" />
+                        </div>
+                    </ng-template>
+
+                    <p class="text-center">
+                        <strong>{{ mascotaForm.value.Nombre }}</strong>
+                    </p>
+
+
+                    <p class="text-center">
+                        <small>{{ mascotaForm.value.Birthday | date:'dd/MM/yyyy' }}</small>
+                    </p>
+
+                    <p class="text-center">
+                        <small>Teléfono: {{ mascotaForm.value.Telefono || 'No disponible' }}</small>
+                    </p>
+
+                    <ng-template pTemplate="footer">
+                        <div class="flex gap-3 mt-1">
+                            <!-- <p-button label="Cancelar" severity="secondary" class="w-full" styleClass="w-full" (click)="cancelar()" />
+                        <p-button label="Guardar" class="w-full" styleClass="w-full" (click)="guardar()" /> -->
+                        </div>
+                    </ng-template>
+                </p-card>
+
+                <!-- <div class="card p-3">
+                    <h3>Vista Previa</h3>
+                    <div *ngIf="mascotaForm.valid; else noPreview">
+                        <p><strong>Nombre:</strong> {{ mascotaForm.value.Nombre }}</p>
+                       
+
+                      
+                        <div style="margin: 20px 0;">
+                            <img *ngIf="qrCodeUrl" [src]="qrCodeUrl" alt="QR de la mascota"
+                                style="width: 150px; height: 150px;" />
+                            <p-button *ngIf="!qrCodeUrl" label="Generar QR" (click)="generarQR()" icon="pi pi-qrcode" />
+                        </div>
+
+                     
+                        <div *ngIf="fotoUrl">
+                            <img [src]="fotoUrl" alt="Foto mascota" style="max-width: 100%; border-radius: 10px;" />
+                        </div>
+                    </div>
+
+                    <ng-template #noPreview>
+                        <p class="text-gray-500">Completa el formulario para ver la vista previa.</p>
+                    </ng-template>
+                </div> -->
+            </div>
+        </div>
+    </p-dialog>
+</div>

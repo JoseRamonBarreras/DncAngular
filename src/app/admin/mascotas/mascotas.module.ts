@@ -22,6 +22,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SharedMascotaService } from './mascota.service';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 
@@ -50,7 +51,8 @@ import { SharedMascotaService } from './mascota.service';
     ReactiveFormsModule,
     InputIconModule,
     IconFieldModule,
-    ProgressBarModule
+    ProgressBarModule,
+    FileUploadModule
   ],
   providers: [
     SharedMascotaService

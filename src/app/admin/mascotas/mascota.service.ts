@@ -7,13 +7,31 @@ import { MascotaModel } from './mascota.model';
   providedIn: 'root'
 })
 export class MascotaService {
-   private end_point: string = 'mascotas';
+  private end_point: string = 'mascotas';
+
+  constructor(private httpService: HttpService) { }
+
+  mascotas(): Observable<any> {
+    return this.httpService.get(this.end_point);
+  }
+
+  especies(): Observable<any> {
+    return this.httpService.get(this.end_point + '/especies');
+  }
+
+  guardar(mascota: MascotaModel): Observable<any> {
+    return this.httpService.post(this.end_point, mascota);
+  }
+
+  update(mascota: MascotaModel): Observable<any> {
+    return this.httpService.put(`${this.end_point}/${mascota.id}`, mascota);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.httpService.delete(`${this.end_point}/${id}`);
+  }
   
-    constructor( private httpService: HttpService ) { }
-  
-    mascotas (): Observable<any> {
-      return this.httpService.get( this.end_point );
-    }
+
 }
 
 export class SharedMascotaService {
@@ -22,7 +40,8 @@ export class SharedMascotaService {
     name: '',
     birthday: '',
     phone: 0,
-    user_id: 0
+    user_id: 0,
+    especie_id: 0
   };
 
   private messageSource = new BehaviorSubject<MascotaModel>(this.shared);
