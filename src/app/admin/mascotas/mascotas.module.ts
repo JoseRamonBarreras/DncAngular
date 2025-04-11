@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListarMascotasComponent } from './pages/listar-mascotas/listar-mascotas.component';
 import { CrearMascotaComponent } from './pages/crear-mascota/crear-mascota.component';
-import { EditarMascotaComponent } from './pages/editar-mascota/editar-mascota.component';
 import { MascotasRoutingModule } from './mascotas-routing.module';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -29,8 +28,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 @NgModule({
   declarations: [
     ListarMascotasComponent,
-    CrearMascotaComponent,
-    EditarMascotaComponent
+    CrearMascotaComponent
   ],
   imports: [
     CommonModule,

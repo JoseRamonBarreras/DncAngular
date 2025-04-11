@@ -15,7 +15,6 @@ export class ListarMascotasComponent {
   mascotas: any[] = [];
   listener!: Subscription;
   displayCrear: boolean = false;
-  displayEditar: boolean = false;
   mascota!: MascotaModel;
   @ViewChild('dt2') dt2!: Table;
   fotoDemo!: string;
@@ -44,7 +43,6 @@ export class ListarMascotasComponent {
     this.listener = this.stateService.currentAccion.subscribe((accion: any) => {
       console.log(accion);
       this.displayCrear = accion.displayCrear;
-     
       if (accion.guardado) {
         this.getMascotasList();
       }
@@ -59,12 +57,12 @@ export class ListarMascotasComponent {
   }
 
   crear() {
-    this.sharedMascota.set(new MascotaModel());  // Pasamos un objeto vacío para crear
+    this.sharedMascota.set(new MascotaModel()); 
     this.displayCrear = true;
   }
 
   editar(mascota: MascotaModel) {
-    this.sharedMascota.set(mascota);  // Aquí pasas la mascota seleccionada a través del servicio
+    this.sharedMascota.set(mascota);  
     this.displayCrear = true;
   }
 

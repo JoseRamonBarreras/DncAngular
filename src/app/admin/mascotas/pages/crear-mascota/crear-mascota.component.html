@@ -25,7 +25,6 @@
                         </div>
                     </div>
 
-
                     <div class="grid" style="margin-bottom: 10px;">
                         <div class="col">
                             <p-inputGroup>
@@ -48,10 +47,7 @@
                                 <p-dropdown id="especie" [options]="especies" optionLabel="especie" optionValue="id"
                                     formControlName="Especie" placeholder="Selecciona una especie">
                                 </p-dropdown>
-
-
                             </div>
-
                         </div>
                         <div class="col">
                             <p-inputGroup>
@@ -84,7 +80,7 @@
                             <img *ngIf="!isEditMode" alt="Foto de Mascota"
                                 [src]="imagenPreview ? imagenPreview : './img/icons/petdemo.png'"
                                 style="width: 150px; height: 150px; object-fit: cover;" />
-                                
+
                             <img *ngIf="isEditMode" alt="Foto de Mascota"
                                 [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'"
                                 style="width: 150px; height: 150px; object-fit: cover;" />
@@ -94,7 +90,6 @@
                     <p class="text-center">
                         <strong>{{ mascotaForm.value.Nombre }}</strong>
                     </p>
-
 
                     <p class="text-center">
                         <small>{{ mascotaForm.value.Birthday | date:'dd/MM/yyyy' }}</small>
@@ -111,30 +106,6 @@
                         </div>
                     </ng-template>
                 </p-card>
-
-                <!-- <div class="card p-3">
-                    <h3>Vista Previa</h3>
-                    <div *ngIf="mascotaForm.valid; else noPreview">
-                        <p><strong>Nombre:</strong> {{ mascotaForm.value.Nombre }}</p>
-                       
-
-                      
-                        <div style="margin: 20px 0;">
-                            <img *ngIf="qrCodeUrl" [src]="qrCodeUrl" alt="QR de la mascota"
-                                style="width: 150px; height: 150px;" />
-                            <p-button *ngIf="!qrCodeUrl" label="Generar QR" (click)="generarQR()" icon="pi pi-qrcode" />
-                        </div>
-
-                     
-                        <div *ngIf="fotoUrl">
-                            <img [src]="fotoUrl" alt="Foto mascota" style="max-width: 100%; border-radius: 10px;" />
-                        </div>
-                    </div>
-
-                    <ng-template #noPreview>
-                        <p class="text-gray-500">Completa el formulario para ver la vista previa.</p>
-                    </ng-template>
-                </div> -->
             </div>
         </div>
     </p-dialog>

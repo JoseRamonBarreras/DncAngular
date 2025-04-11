@@ -46,14 +46,13 @@ export class CrearMascotaComponent {
       console.log('Especies', this.especies);
     }, error => error);
 
-    // Suscripción al objeto compartido
     this.sharedMascota.current.subscribe(mascota => {
       if (mascota.id) {
         this.mascota = mascota;
-        this.isEditMode = true;  // Si hay id, estamos editando
-        this.setFormValues();  // Rellenamos el formulario con los datos de la mascota
+        this.isEditMode = true;
+        this.setFormValues();
       } else {
-        this.mascota = new MascotaModel();  // Si no hay id, es un nuevo objeto
+        this.mascota = new MascotaModel();
         this.isEditMode = false;
       }
     });
@@ -122,10 +121,9 @@ export class CrearMascotaComponent {
     this.mascota.phone = this.mascotaForm.value.Telefono;
     this.mascota.user_id = Number(localStorage.getItem('user_id'));
 
- // Si el campo Foto no ha sido alterado (pristine), eliminamos la propiedad foto del modelo
- if (this.mascotaForm.get('Foto')?.pristine) {
-  delete this.mascota.foto;
-}
+    if (this.mascotaForm.get('Foto')?.pristine) {
+      delete this.mascota.foto;
+    }
 
     console.log('Mascota en crear', this.mascota);
 
@@ -135,15 +133,15 @@ export class CrearMascotaComponent {
         Swal.fire('Actualizado!', 'Mascota actualizada correctamente', 'success');
         this.loading = false;
         this.visible = false;
-        this.resetForm();  
-        this.stateService.saved(); 
+        this.resetForm();
+        this.stateService.saved();
       }, error => {
         console.log('Error al actualizar:', error);
         Swal.fire('Error', 'Hubo un error al actualizar la mascota', 'error');
         this.loading = false;
         this.visible = false;
-        this.resetForm();  
-        this.stateService.cancelarAgregar(); 
+        this.resetForm();
+        this.stateService.cancelarAgregar();
       });
     } else {
       this.mascotaService.guardar(this.mascota).subscribe(resp => {
