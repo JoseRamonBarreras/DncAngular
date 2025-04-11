@@ -20,8 +20,11 @@
                                     style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
                             </div>
 
-                            <input id="foto" type="file" formControlName="Foto" (change)="onFileChange($event)"
-                                accept="image/*" style="display: inline-block;" />
+                            <!-- <input id="foto" type="file" formControlName="Foto" (change)="onFileChange($event)"
+                                accept="image/*" style="display: inline-block;" /> -->
+
+                            <p-button label="Subir Imagen" severity="secondary" (click)="subirImagen()" />
+                                
                         </div>
                     </div>
 
@@ -110,3 +113,6 @@
         </div>
     </p-dialog>
 </div>
+
+<app-crop-image (parentFunctionCrop)="parentFunctionCrop($event)" 
+    *ngIf="displayCrop"></app-crop-image>

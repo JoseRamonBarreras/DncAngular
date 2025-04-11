@@ -4,6 +4,8 @@ import { MascotaModel } from '../../mascota.model';
 import { StateService } from '../../../shared/services/state.service';
 import { MascotaService, SharedMascotaService } from '../../mascota.service';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
+import { ComponentStateService } from '../../../shared/services/component-state.service';
 
 type DialogPosition = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
 
@@ -28,11 +30,15 @@ export class CrearMascotaComponent {
 
   isEditMode: boolean = false;
 
+  displayCrop: boolean = false;
+  listener!: Subscription;
+
 
   constructor(
     private stateService: StateService,
     private mascotaService: MascotaService,
-    private sharedMascota: SharedMascotaService
+    private sharedMascota: SharedMascotaService,
+    private componentState: ComponentStateService
   ) {
 
   }
@@ -56,11 +62,19 @@ export class CrearMascotaComponent {
         this.isEditMode = false;
       }
     });
+    this.listeners();
+  }
+
+  private listeners() {
+    this.listener = this.componentState.currentAccion.subscribe((accion: any) => {
+      console.log(accion);
+      this.displayCrop = accion.displayCrop;
+    });
   }
 
   createForm() {
     this.mascotaForm = new FormGroup({
-      Foto: new FormControl(''),
+      //Foto: new FormControl(''),
       Nombre: new FormControl('', [Validators.required]),
       Birthday: new FormControl('', [Validators.required]),
       Especie: new FormControl('', [Validators.required]),
@@ -104,6 +118,15 @@ export class CrearMascotaComponent {
   showDialog(position: DialogPosition = 'top'): void {
     this.position = position;
     this.visible = true;
+  }
+
+  subirImagen(){
+    this.displayCrop = true;
+  }
+
+  parentFunctionCrop(base64: string) {
+    console.log('Imagen recortada (base64):', base64);
+    this.imagenPreview = base64;
   }
 
   cancelar() {

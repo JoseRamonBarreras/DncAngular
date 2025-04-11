@@ -22,13 +22,16 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SharedMascotaService } from './mascota.service';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { CropImageComponent } from './pages/crear-mascota/components/crop-image/crop-image.component'; 
 
 
 
 @NgModule({
   declarations: [
     ListarMascotasComponent,
-    CrearMascotaComponent
+    CrearMascotaComponent,
+    CropImageComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     InputIconModule,
     IconFieldModule,
     ProgressBarModule,
-    FileUploadModule
+    FileUploadModule,
+    ImageCropperModule
   ],
   providers: [
     SharedMascotaService

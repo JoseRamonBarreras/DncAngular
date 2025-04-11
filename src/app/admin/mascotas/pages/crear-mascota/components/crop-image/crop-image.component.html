@@ -1,0 +1,27 @@
+<p-dialog header="Recortar Imagen" [modal]="true" [(visible)]="visible" [position]="position"
+    [style]="{ width: '50rem' }" (onHide)="cancelar()">
+    <div class="grid">
+        <div class="col-12">
+            <input type="file" (change)="fileChangeEvent($event)" />
+
+            <image-cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="4 / 3"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded($event)"
+                (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+
+            <img [src]="croppedImage" />
+
+            <div class="text-right mt-4">
+                <button type="button" pButton label="Guardar" (click)="guardar()"
+                    class="p-button-success mr-2"></button>
+                <button type="button" pButton label="Cancelar" (click)="cancelar()" class="p-button-secondary"></button>
+            </div>
+        </div>
+    </div>
+</p-dialog>
