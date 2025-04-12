@@ -41,11 +41,9 @@ export class ListarMascotasComponent {
 
   private listeners() {
     this.listener = this.stateService.currentAccion.subscribe((accion: any) => {
-      console.log(accion);
+      console.log('Accion', accion);
       this.displayCrear = accion.displayCrear;
-      if (accion.guardado) {
-        this.getMascotasList();
-      }
+      this.getMascotasList();
     });
   }
 
@@ -57,12 +55,12 @@ export class ListarMascotasComponent {
   }
 
   crear() {
-    this.sharedMascota.set(new MascotaModel()); 
+    this.sharedMascota.set(new MascotaModel());
     this.displayCrear = true;
   }
 
   editar(mascota: MascotaModel) {
-    this.sharedMascota.set(mascota);  
+    this.sharedMascota.set(mascota);
     this.displayCrear = true;
   }
 

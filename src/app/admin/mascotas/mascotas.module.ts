@@ -24,7 +24,7 @@ import { SharedMascotaService } from './mascota.service';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropImageComponent } from './pages/crear-mascota/components/crop-image/crop-image.component'; 
-
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -57,7 +57,8 @@ import { CropImageComponent } from './pages/crear-mascota/components/crop-image/
     ImageCropperModule
   ],
   providers: [
-    SharedMascotaService
+    SharedMascotaService,
+    MessageService
   ]
 })
 export class MascotasModule { }

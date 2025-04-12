@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MascotaModel } from '../../mascota.model';
 import { StateService } from '../../../shared/services/state.service';
 import { MascotaService, SharedMascotaService } from '../../mascota.service';
+import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { ComponentStateService } from '../../../shared/services/component-state.service';
@@ -31,6 +32,7 @@ export class CrearMascotaComponent {
   isEditMode: boolean = false;
 
   displayCrop: boolean = false;
+  fotoEditada: boolean = false;
   listener!: Subscription;
 
 
@@ -38,7 +40,8 @@ export class CrearMascotaComponent {
     private stateService: StateService,
     private mascotaService: MascotaService,
     private sharedMascota: SharedMascotaService,
-    private componentState: ComponentStateService
+    private componentState: ComponentStateService,
+    private messageService: MessageService
   ) {
 
   }
@@ -56,10 +59,13 @@ export class CrearMascotaComponent {
       if (mascota.id) {
         this.mascota = mascota;
         this.isEditMode = true;
+        this.fotoEditada = false;
         this.setFormValues();
+        console.log('Mascota Edit', this.mascota);
       } else {
         this.mascota = new MascotaModel();
         this.isEditMode = false;
+        console.log('Mascota Create', this.mascota);
       }
     });
     this.listeners();
@@ -74,7 +80,6 @@ export class CrearMascotaComponent {
 
   createForm() {
     this.mascotaForm = new FormGroup({
-      //Foto: new FormControl(''),
       Nombre: new FormControl('', [Validators.required]),
       Birthday: new FormControl('', [Validators.required]),
       Especie: new FormControl('', [Validators.required]),
@@ -120,13 +125,15 @@ export class CrearMascotaComponent {
     this.visible = true;
   }
 
-  subirImagen(){
+  subirImagen() {
     this.displayCrop = true;
   }
 
   parentFunctionCrop(base64: string) {
     console.log('Imagen recortada (base64):', base64);
     this.imagenPreview = base64;
+    this.mascota.foto = base64;
+    this.fotoEditada = true;
   }
 
   cancelar() {
@@ -143,8 +150,7 @@ export class CrearMascotaComponent {
     this.mascota.especie_id = this.mascotaForm.value.Especie;
     this.mascota.phone = this.mascotaForm.value.Telefono;
     this.mascota.user_id = Number(localStorage.getItem('user_id'));
-
-    if (this.mascotaForm.get('Foto')?.pristine) {
+    if (!this.fotoEditada && this.isEditMode) {
       delete this.mascota.foto;
     }
 
@@ -153,11 +159,13 @@ export class CrearMascotaComponent {
     if (this.isEditMode) {
       this.mascotaService.update(this.mascota).subscribe(resp => {
         console.log('Mascota actualizada:', resp);
-        Swal.fire('Actualizado!', 'Mascota actualizada correctamente', 'success');
         this.loading = false;
-        this.visible = false;
-        this.resetForm();
-        this.stateService.saved();
+        this.sharedMascota.set(resp.mascota);
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Actualizado',
+          detail: 'La mascota se actualizo correctamente'
+        });
       }, error => {
         console.log('Error al actualizar:', error);
         Swal.fire('Error', 'Hubo un error al actualizar la mascota', 'error');
@@ -169,11 +177,19 @@ export class CrearMascotaComponent {
     } else {
       this.mascotaService.guardar(this.mascota).subscribe(resp => {
         console.log('FromBackend', resp);
-        Swal.fire({ title: 'Mascota guardada correctamente', text: '', icon: 'success' });
         this.loading = false;
-        this.visible = false;
-        this.resetForm();
-        this.stateService.saved();
+        this.sharedMascota.set(resp.mascota);
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Guardado',
+          detail: 'La mascota se guardó correctamente'
+        });
+        //this.isEditMode = true;
+        //this.setFormValues();
+        //this.visible = false;
+        //this.resetForm();
+        //this.stateService.saved();
       }, error => {
         console.log('error', error);
         Swal.fire({ title: 'Error al guardar el mascota', text: '', icon: 'warning' });

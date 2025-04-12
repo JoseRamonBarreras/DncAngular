@@ -5,6 +5,7 @@
         <div class="grid">
             <!-- COLUMNA IZQUIERDA: FORMULARIO -->
             <div class="col-6">
+                <p-toast></p-toast>
                 <form [formGroup]="mascotaForm" (ngSubmit)="guardar()">
 
                     <div class="grid" style="margin-bottom: 10px;">
@@ -24,7 +25,7 @@
                                 accept="image/*" style="display: inline-block;" /> -->
 
                             <p-button label="Subir Imagen" severity="secondary" (click)="subirImagen()" />
-                                
+
                         </div>
                     </div>
 
@@ -64,8 +65,11 @@
                     <div class="grid" style="margin-bottom: 10px;">
                         <div class="col-12" style="display: flex; justify-content: flex-end;">
                             <p-button label="Cancelar" severity="secondary" (click)="cancelar()" />
-                            <p-button type="submit" label="Guardar" severity="success"
-                                [disabled]="!mascotaForm.valid" />
+                            <!-- <p-button type="submit" label="Guardar" severity="success"
+                                [disabled]="!mascotaForm.valid" /> -->
+                            <p-button type="submit" [label]="isEditMode ? 'Actualizar' : 'Guardar'"
+                                [severity]="isEditMode ? 'primary' : 'success'" [disabled]="!mascotaForm.valid">
+                            </p-button>
                         </div>
                     </div>
 
@@ -114,5 +118,4 @@
     </p-dialog>
 </div>
 
-<app-crop-image (parentFunctionCrop)="parentFunctionCrop($event)" 
-    *ngIf="displayCrop"></app-crop-image>
+<app-crop-image (parentFunctionCrop)="parentFunctionCrop($event)" *ngIf="displayCrop"></app-crop-image>
