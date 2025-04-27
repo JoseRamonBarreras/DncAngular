@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MascotaModel } from '../../mascota.model';
-import { StateService } from '../../../shared/services/state.service';
-import { MascotaService, SharedMascotaService } from '../../mascota.service';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 import { ComponentStateService } from '../../../shared/services/component-state.service';
+import { StateService } from '../../../shared/services/state.service';
+import { MascotaModel } from '../../mascota.model';
+import { MascotaService, SharedMascotaService } from '../../mascota.service';
+import { environment } from '../../../../../environments/environment';
 
 type DialogPosition = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
 
@@ -26,8 +27,9 @@ export class CrearMascotaComponent {
   qrCodeUrl: string | null = null;
   fotoUrl: string | null = null;
   imagenPreview: string | ArrayBuffer | null = null;
-  fotoDemo: string = "./img/icons/petdemo.png";
-  baseUrl = 'http://127.0.0.1:8000/storage/mascotas/';
+  fotoDemo: string = environment.fotoDemo;
+  baseUrl = environment.baseUrl;
+  baseQr = environment.baseQr;
 
   isEditMode: boolean = false;
 
@@ -35,20 +37,20 @@ export class CrearMascotaComponent {
   fotoEditada: boolean = false;
   listener!: Subscription;
 
-
   constructor(
     private stateService: StateService,
     private mascotaService: MascotaService,
     private sharedMascota: SharedMascotaService,
     private componentState: ComponentStateService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private cd: ChangeDetectorRef
   ) {
 
   }
 
   ngOnInit(): void {
-    this.showDialog();
     this.createForm();
+    this.showDialog();
 
     this.mascotaService.especies().subscribe(resp => {
       this.especies = resp;
@@ -60,7 +62,10 @@ export class CrearMascotaComponent {
         this.mascota = mascota;
         this.isEditMode = true;
         this.fotoEditada = false;
-        this.setFormValues();
+        setTimeout(() => {
+          this.setFormValues();
+        }, 1000);
+
         console.log('Mascota Edit', this.mascota);
       } else {
         this.mascota = new MascotaModel();
@@ -68,6 +73,7 @@ export class CrearMascotaComponent {
         console.log('Mascota Create', this.mascota);
       }
     });
+
     this.listeners();
   }
 
@@ -81,23 +87,32 @@ export class CrearMascotaComponent {
   createForm() {
     this.mascotaForm = new FormGroup({
       Nombre: new FormControl('', [Validators.required]),
-      Birthday: new FormControl('', [Validators.required]),
+      Birthday: new FormControl('', [Validators.required, this.yearLengthValidator]),
       Especie: new FormControl('', [Validators.required]),
       Telefono: new FormControl(''),
     });
+  }
+
+  private yearLengthValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (!value) return null;
+
+    const year = new Date(value).getFullYear().toString();
+    return year.length === 4 ? null : { invalidYear: true };
   }
 
   setFormValues() {
     this.mascotaForm.patchValue({
       Nombre: this.mascota.name,
       Birthday: this.mascota.birthday,
-      Especie: this.mascota.especie_id,
+      Especie: +this.mascota.especie_id,
       Telefono: this.mascota.phone
     });
 
     if (this.mascota.foto) {
       this.fotoDemo = this.baseUrl + this.mascota.foto;
     }
+    this.cd.detectChanges();
   }
 
   onFileChange(event: any) {
@@ -116,7 +131,7 @@ export class CrearMascotaComponent {
   resetForm() {
     this.mascotaForm.reset();
     this.mascota = new MascotaModel();
-    this.fotoDemo = "./img/icons/petdemo.png";
+    this.fotoDemo = environment.fotoDemo;
     this.isEditMode = false;
   }
 
@@ -185,11 +200,7 @@ export class CrearMascotaComponent {
           summary: 'Guardado',
           detail: 'La mascota se guardó correctamente'
         });
-        //this.isEditMode = true;
-        //this.setFormValues();
-        //this.visible = false;
-        //this.resetForm();
-        //this.stateService.saved();
+
       }, error => {
         console.log('error', error);
         Swal.fire({ title: 'Error al guardar el mascota', text: '', icon: 'warning' });
@@ -201,12 +212,44 @@ export class CrearMascotaComponent {
     }
   }
 
-  generarQR() {
-    const data = this.mascotaForm.value.Nombre; // Puedes concatenar más info si quieres
-    // Suponiendo que tienes un servicio que te genera la imagen QR:
-    //this.qrCodeUrl = this.qrService.generarQRComoDataURL(data); // solo ejemplo
+  descargarQr(id: number): void {
+    this.mascotaService.descargarQr(id).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `qr_mascota_${id}.png`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error al descargar QR:', err);
+      }
+    });
   }
 
+  get claseImagen(): string {
+    const especie = this.mascotaForm.value.Especie;
+    if (especie === 1) return 'img-perro';
+    if (especie === 2) return 'img-gato';
+    return '';
+  }
+
+  getEdad(fechaNacimiento: string): string {
+    if (!fechaNacimiento) return 'Edad no disponible';
+
+    const nacimiento = new Date(fechaNacimiento);
+    const hoy = new Date();
+
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+
+    return `${edad} ${edad === 1 ? 'año' : 'años'}`;
+  }
 
   private formatDate(fecha: any) {
     var fechaFormat = new Date(fecha);

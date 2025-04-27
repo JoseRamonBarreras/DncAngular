@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="grid">
+        <div class="col">
+            <div *ngIf="mascota" class="carta" [ngClass]="claseImagen">
+                <div [ngClass]="claseImagen" style="padding-top: 0px; border-radius: 10px;">
+                    <div class="text-center imagen-mascota">
+                        <img alt="Foto de Mascota"
+                            [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'"
+                            style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;" />
+                    </div>
+                </div>
+
+                <div class="p-3 text-center" [ngClass]="claseImagen">
+                    <p class="m-0 mascota-nombre">{{ mascota.name }}</p>
+                    <p class="m-0 mascota-fecha" *ngIf="mascota.birthday">
+                        Edad: <strong>{{ getEdad(mascota.birthday) }}</strong>
+                      </p>
+                     
+                    <p class="m-0 mascota-telefono">Teléfono: <strong>{{ mascota.phone || 'No disponible' }}</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

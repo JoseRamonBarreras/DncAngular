@@ -1,7 +1,7 @@
 .carta {
     width: 100%;
     display: block;
-    padding-bottom: 50px;
+    padding-bottom: 200px;
     border-radius: 10px;
 }
 
@@ -16,24 +16,24 @@
 }
 
 .imagen-mascota {
-    padding-top: 55px;
+    padding-top: 100px;
 
 }
 
 .mascota-nombre {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 2.5vw;
+    font-size: 50px;
     font-weight:bolder
 }
 
 .mascota-fecha {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 1vw;
+    font-size: 30px;
     font-weight: 600;
 }
 
 .mascota-telefono {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 1vw;
+    font-size: 30px;
     font-weight: 600;
 }

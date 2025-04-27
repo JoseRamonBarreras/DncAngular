@@ -9,6 +9,10 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
+  {
+    path: 'mascota',
+    loadChildren: () => import('./mascota/mascota.module').then(m => m.MascotaModule)
+  },
   { path: 'admin', component: AdminComponent,
     canActivate: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) 

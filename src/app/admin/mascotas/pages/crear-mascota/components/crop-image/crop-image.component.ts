@@ -22,12 +22,9 @@ export class CropImageComponent implements OnInit {
   constructor(
     private componentState: ComponentStateService,
     private sanitizer: DomSanitizer
-    // private consultaService: ConsultaService,
-    // private historialService: HistorialService
   ) {
 
   }
-
 
   ngOnInit(): void {
     this.position = 'top';
@@ -36,38 +33,36 @@ export class CropImageComponent implements OnInit {
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
-}
-imageCropped(event: ImageCroppedEvent | any) {
-  //this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
-  // event.blob can be used to upload the cropped image
-  if (event.blob) {
-    this.convertBlobToBase64(event.blob).then(base64 => {
-      this.croppedImage = base64;
-      console.log('Cropped Image as Base64:', this.croppedImage);
-    });
-  } else {
-    console.error('No blob in cropped event');
   }
-}
+  imageCropped(event: ImageCroppedEvent | any) {
+    if (event.blob) {
+      this.convertBlobToBase64(event.blob).then(base64 => {
+        this.croppedImage = base64;
+        console.log('Cropped Image as Base64:', this.croppedImage);
+      });
+    } else {
+      console.error('No blob in cropped event');
+    }
+  }
 
-convertBlobToBase64(blob: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
+  convertBlobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
 
-imageLoaded(image: LoadedImage) {
+  imageLoaded(image: LoadedImage) {
     // show cropper
-}
-cropperReady() {
+  }
+  cropperReady() {
     // cropper ready
-}
-loadImageFailed() {
+  }
+  loadImageFailed() {
     // show message
-}
+  }
 
   cancelar() {
     this.visible = false;

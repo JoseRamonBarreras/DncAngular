@@ -5,6 +5,8 @@ import { Table } from 'primeng/table';
 import Swal from 'sweetalert2';
 import { MascotaService, SharedMascotaService } from '../../mascota.service';
 import { StateService } from '../../../shared/services/state.service';
+import { environment } from '../../../../../environments/environment';
+
 
 @Component({
   selector: 'app-listar-mascotas',
@@ -18,7 +20,7 @@ export class ListarMascotasComponent {
   mascota!: MascotaModel;
   @ViewChild('dt2') dt2!: Table;
   fotoDemo!: string;
-  baseUrl = 'http://127.0.0.1:8000/storage/mascotas/';
+  baseUrl: string = environment.baseUrl;
 
   constructor(
     private mascotaService: MascotaService,
@@ -29,14 +31,14 @@ export class ListarMascotasComponent {
   }
 
   ngOnInit(): void {
-    this.fotoDemo = "./img/icons/petdemo.png";
+    this.fotoDemo = environment.fotoDemo;
     this.getMascotasList();
     this.listeners();
   }
 
   onFilter(event: Event): void {
     const inputValue = (event.target as HTMLInputElement).value;
-    this.dt2.filterGlobal(inputValue, 'contains');  // Accedemos a la tabla a través de ViewChild
+    this.dt2.filterGlobal(inputValue, 'contains');  
   }
 
   private listeners() {

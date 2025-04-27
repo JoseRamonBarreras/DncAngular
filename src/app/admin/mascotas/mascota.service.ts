@@ -30,6 +30,11 @@ export class MascotaService {
   delete(id: number): Observable<any> {
     return this.httpService.delete(`${this.end_point}/${id}`);
   }
+
+  descargarQr(id: number): Observable<Blob> {
+    const url = `mascotas/descargar/qr/${id}`;
+    return this.httpService.getImage(url, { responseType: 'blob' });
+  }
   
 
 }
@@ -39,7 +44,7 @@ export class SharedMascotaService {
     id: 0,
     name: '',
     birthday: '',
-    phone: 0,
+    phone: '',
     user_id: 0,
     especie_id: 0
   };

@@ -25,6 +25,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropImageComponent } from './pages/crear-mascota/components/crop-image/crop-image.component'; 
 import { MessageService } from 'primeng/api';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { MessageService } from 'primeng/api';
     IconFieldModule,
     ProgressBarModule,
     FileUploadModule,
-    ImageCropperModule
+    ImageCropperModule,
+    InputMaskModule
   ],
   providers: [
     SharedMascotaService,

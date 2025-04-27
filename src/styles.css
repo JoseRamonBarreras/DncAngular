@@ -1,2 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.img-gato {
+    background-color: #431f39 !important;
+    color: #f8e5d4 !important;
+  }
+  
+  .img-perro {
+    background-color: #f8e5d4 !important;
+    color: #431f39 !important;
+  }
+  

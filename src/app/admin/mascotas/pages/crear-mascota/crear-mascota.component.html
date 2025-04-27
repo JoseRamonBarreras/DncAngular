@@ -21,9 +21,6 @@
                                     style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
                             </div>
 
-                            <!-- <input id="foto" type="file" formControlName="Foto" (change)="onFileChange($event)"
-                                accept="image/*" style="display: inline-block;" /> -->
-
                             <p-button label="Subir Imagen" severity="secondary" (click)="subirImagen()" />
 
                         </div>
@@ -54,19 +51,16 @@
                             </div>
                         </div>
                         <div class="col">
-                            <p-inputGroup>
-                                <p-inputGroupAddon>Telefono</p-inputGroupAddon>
-                                <input type="number" pInputText placeholder="Telefono" formControlName="Telefono" />
-                            </p-inputGroup>
+          
                             <small class="text-muted">Teléfono de contacto. (opcional)</small>
+                            <p-inputMask mask="(999) 999-9999" formControlName="Telefono" placeholder="(999) 999-9999" />
                         </div>
                     </div>
 
                     <div class="grid" style="margin-bottom: 10px;">
                         <div class="col-12" style="display: flex; justify-content: flex-end;">
-                            <p-button label="Cancelar" severity="secondary" (click)="cancelar()" />
-                            <!-- <p-button type="submit" label="Guardar" severity="success"
-                                [disabled]="!mascotaForm.valid" /> -->
+                            <p-button [label]="isEditMode ? 'Cerrar' : 'Cancelar'" severity="secondary"
+                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }" />
                             <p-button type="submit" [label]="isEditMode ? 'Actualizar' : 'Guardar'"
                                 [severity]="isEditMode ? 'primary' : 'success'" [disabled]="!mascotaForm.valid">
                             </p-button>
@@ -80,39 +74,42 @@
             </div>
 
             <!-- COLUMNA DERECHA: PREVIEW QR Y DATOS -->
-            <div class="col-6">
-                <p-card [style]="{ width: '360px' }">
-                    <ng-template pTemplate="header">
-                        <div class="text-center">
+            <div class="col-3">
+
+                <div class="carta" [ngClass]="claseImagen">
+
+                    <div [ngClass]="claseImagen" style="padding-top: 0px; border-radius: 10px;">
+                        <div class="text-center imagen-mascota">
                             <img *ngIf="!isEditMode" alt="Foto de Mascota"
                                 [src]="imagenPreview ? imagenPreview : './img/icons/petdemo.png'"
-                                style="width: 150px; height: 150px; object-fit: cover;" />
+                                style="width: 150px; height: 150px; object-fit: cover;border-radius: 50%; " />
 
                             <img *ngIf="isEditMode" alt="Foto de Mascota"
                                 [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'"
-                                style="width: 150px; height: 150px; object-fit: cover;" />
+                                style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
                         </div>
-                    </ng-template>
+                    </div>
 
-                    <p class="text-center">
-                        <strong>{{ mascotaForm.value.Nombre }}</strong>
-                    </p>
+                    <div class="p-3 text-center" [ngClass]="claseImagen">
+                        <p class="m-0 mascota-nombre">{{ mascotaForm.value.Nombre }}</p>
+                        <p class="m-0 mascota-fecha">Edad: <strong>{{ getEdad(mascotaForm.value.Birthday) }}</strong>
+                        </p>
 
-                    <p class="text-center">
-                        <small>{{ mascotaForm.value.Birthday | date:'dd/MM/yyyy' }}</small>
-                    </p>
+                        <p class="m-0 mascota-telefono">Teléfono: <strong>{{ mascotaForm.value.Telefono || 'No
+                                disponible' }}</strong></p>
+                    </div>
 
-                    <p class="text-center">
-                        <small>Teléfono: {{ mascotaForm.value.Telefono || 'No disponible' }}</small>
-                    </p>
+                </div>
 
-                    <ng-template pTemplate="footer">
-                        <div class="flex gap-3 mt-1">
-                            <!-- <p-button label="Cancelar" severity="secondary" class="w-full" styleClass="w-full" (click)="cancelar()" />
-                        <p-button label="Guardar" class="w-full" styleClass="w-full" (click)="guardar()" /> -->
-                        </div>
-                    </ng-template>
-                </p-card>
+
+            </div>
+            <div class="col-3" style="text-align: center;">
+                <img *ngIf="mascota?.id" [src]="baseQr + mascota.id" alt="Código QR" /><br>
+
+                <button pButton type="button" icon="pi pi-download" label="Descargar QR"
+                    (click)="descargarQr(mascota.id)">
+                </button>
+
             </div>
         </div>
     </p-dialog>

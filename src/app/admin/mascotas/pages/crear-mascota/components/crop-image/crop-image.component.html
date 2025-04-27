@@ -18,9 +18,10 @@
             <img [src]="croppedImage" />
 
             <div class="text-right mt-4">
+                <button type="button" pButton label="Cancelar" (click)="cancelar()" class="p-button-secondary" style="margin-right: 5px;"></button>
                 <button type="button" pButton label="Guardar" (click)="guardar()"
                     class="p-button-success mr-2"></button>
-                <button type="button" pButton label="Cancelar" (click)="cancelar()" class="p-button-secondary"></button>
+                
             </div>
         </div>
     </div>

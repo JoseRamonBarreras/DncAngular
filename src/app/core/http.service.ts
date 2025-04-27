@@ -26,4 +26,9 @@ export class HttpService {
   delete(endpoint: string): Observable<any> {
     return this.http.delete(HttpService.API_END_POINT + endpoint);
   }
+
+  getImage(endpoint: string, responseType: Object): Observable<any> {
+    return this.http.get(HttpService.API_END_POINT + endpoint, responseType);
+  }
+
 }
