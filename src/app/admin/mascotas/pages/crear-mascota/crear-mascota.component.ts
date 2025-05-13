@@ -30,7 +30,6 @@ export class CrearMascotaComponent {
   fotoDemo: string = environment.fotoDemo;
   baseUrl = environment.baseUrl;
   baseQr = environment.baseQr;
-
   isEditMode: boolean = false;
 
   displayCrop: boolean = false;
@@ -87,6 +86,7 @@ export class CrearMascotaComponent {
   createForm() {
     this.mascotaForm = new FormGroup({
       Nombre: new FormControl('', [Validators.required]),
+      Descripcion: new FormControl(''),
       Birthday: new FormControl('', [Validators.required, this.yearLengthValidator]),
       Especie: new FormControl('', [Validators.required]),
       Telefono: new FormControl(''),
@@ -104,6 +104,7 @@ export class CrearMascotaComponent {
   setFormValues() {
     this.mascotaForm.patchValue({
       Nombre: this.mascota.name,
+      Descripcion: this.mascota.descripcion,
       Birthday: this.mascota.birthday,
       Especie: +this.mascota.especie_id,
       Telefono: this.mascota.phone
@@ -161,6 +162,7 @@ export class CrearMascotaComponent {
     this.loading = true;
 
     this.mascota.name = this.mascotaForm.value.Nombre;
+    this.mascota.descripcion = this.mascotaForm.value.Descripcion;
     this.mascota.birthday = this.mascotaForm.value.Birthday;
     this.mascota.especie_id = this.mascotaForm.value.Especie;
     this.mascota.phone = this.mascotaForm.value.Telefono;

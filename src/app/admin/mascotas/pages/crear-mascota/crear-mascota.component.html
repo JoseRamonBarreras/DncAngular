@@ -1,6 +1,6 @@
 <div class="card">
     <p-dialog header="Agregar Mascota" [modal]="true" [(visible)]="visible" [position]="position"
-        [style]="{ width: '100rem', minHeight: '30rem' }" (onHide)="cancelar()">
+        [style]="{ width: '100rem', minHeight: '30rem' }" (onHide)="cancelar()" styleClass="custom-dialog">
 
         <div class="grid">
             <!-- COLUMNA IZQUIERDA: FORMULARIO -->
@@ -43,6 +43,16 @@
 
                     <div class="grid" style="margin-bottom: 10px;">
                         <div class="col">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>Descripcion</p-inputGroupAddon>
+                                <textarea rows="4" cols="60" pInputTextarea formControlName="Descripcion"></textarea>
+                            </p-inputGroup>
+                        </div>
+
+                    </div>
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
                             <div class="p-field">
                                 <label for="especie">Especie</label>
                                 <p-dropdown id="especie" [options]="especies" optionLabel="especie" optionValue="id"
@@ -51,16 +61,18 @@
                             </div>
                         </div>
                         <div class="col">
-          
+
                             <small class="text-muted">Teléfono de contacto. (opcional)</small>
-                            <p-inputMask mask="(999) 999-9999" formControlName="Telefono" placeholder="(999) 999-9999" />
+                            <p-inputMask mask="(999) 999-9999" formControlName="Telefono"
+                                placeholder="(999) 999-9999" />
                         </div>
                     </div>
 
                     <div class="grid" style="margin-bottom: 10px;">
                         <div class="col-12" style="display: flex; justify-content: flex-end;">
                             <p-button [label]="isEditMode ? 'Cerrar' : 'Cancelar'" severity="secondary"
-                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }" />
+                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }"
+                                styleClass="p-button-cancelar" />
                             <p-button type="submit" [label]="isEditMode ? 'Actualizar' : 'Guardar'"
                                 [severity]="isEditMode ? 'primary' : 'success'" [disabled]="!mascotaForm.valid">
                             </p-button>
@@ -76,7 +88,7 @@
             <!-- COLUMNA DERECHA: PREVIEW QR Y DATOS -->
             <div class="col-3">
 
-                <div class="carta" [ngClass]="claseImagen">
+                <!-- <div class="carta" [ngClass]="claseImagen">
 
                     <div [ngClass]="claseImagen" style="padding-top: 0px; border-radius: 10px;">
                         <div class="text-center imagen-mascota">
@@ -99,7 +111,66 @@
                                 disponible' }}</strong></p>
                     </div>
 
-                </div>
+                </div> -->
+
+                <!-- <p-card [style]="{ width: '360px', overflow: 'hidden', position: 'relative' }">
+                    <ng-template pTemplate="header">
+                      <div class="card-image-wrapper" style="height: 280px;">
+                        <img *ngIf="!isEditMode" alt="Foto de Mascota"
+                                [src]="imagenPreview ? imagenPreview : './img/icons/petdemo.png'"/>
+
+                        <img *ngIf="isEditMode" alt="Foto de Mascota"
+                                [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'"/>
+
+                        <div class="gradient-overlay"></div>
+                      </div>
+                      <div class="card-content-overlay text-white">
+                        <h2 class="mb-2">{{ mascotaForm.value.Nombre }}</h2>
+                        <p>Edad: <strong>{{ getEdad(mascotaForm.value.Birthday) }}</strong>.</p>
+                        <p>Teléfono: <strong>{{ mascotaForm.value.Telefono || 'No
+                            disponible' }}</strong></p>
+                      </div>
+                    </ng-template>
+                  
+        
+                  
+          
+                  </p-card> -->
+
+                <p-card header="{{ mascotaForm.value.Nombre }}"
+                    subheader="{{ mascotaForm.value.Descripcion }}"
+                    [style]="{ width: '360px', backgroundImage: 'url(/img/pet-background.png)', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }">
+                    <ng-template pTemplate="header">
+                        <img *ngIf="!isEditMode" alt="Foto de Mascota"
+                            [src]="imagenPreview ? imagenPreview : './img/icons/petdemo.png'" />
+
+                        <img *ngIf="isEditMode" alt="Foto de Mascota"
+                            [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'" />
+                    </ng-template>
+
+                    <div class="card-content">
+                        <i class="pi pi-gift icon-gift" style="font-size: 20px; color: #77352C;"></i>
+                        <h3 class="phone-number">{{ getEdad(mascotaForm.value.Birthday) }}</h3>
+                    </div>
+
+                    <div class="card-content">
+
+
+                        <i class="pi pi-user icon-user" style="font-size: 20px; color: #77352C;"></i>
+                        <h3 class="phone-number">{{ mascotaForm.value.Telefono || 'No
+                            disponible' }}</h3>
+                        <button pButton type="button" icon="pi pi-phone"
+                            class="p-button-rounded p-button-text p-button-sm p-button-success"></button>
+                    </div>
+
+                    <ng-template pTemplate="footer">
+                        <div class="flex gap-3 mt-1">
+                            <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+                            <p-button label="Save" class="w-full" styleClass="w-full" />
+                        </div>
+                    </ng-template>
+                </p-card>
+
 
 
             </div>

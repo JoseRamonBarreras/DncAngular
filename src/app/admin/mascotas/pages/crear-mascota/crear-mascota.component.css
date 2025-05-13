@@ -5,21 +5,6 @@
     border-radius: 10px;
 }
 
-.img-gato {
-    background-color: #431f39;
-    color: #f8e5d4;
-}
-
-.img-perro {
-    background-color: #f8e5d4;
-    color: #431f39;
-}
-
-.imagen-mascota {
-    padding-top: 55px;
-
-}
-
 .mascota-nombre {
     font-family: 'Montserrat', sans-serif !important;
     font-size: 2.5vw;
@@ -37,3 +22,23 @@
     font-size: 1vw;
     font-weight: 600;
 }
+
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre elementos */
+}
+
+.icon-user {
+  /* font-size: 1.2rem; */
+}
+
+.phone-number {
+  color: #B73A24;
+  text-align: center;
+  margin-right: auto; /* Opcional si deseas empujar el botón a la derecha */
+}
+  
+
+

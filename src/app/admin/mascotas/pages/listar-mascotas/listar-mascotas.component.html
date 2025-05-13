@@ -9,14 +9,14 @@
     <p-table #dt2 dataKey="id" [value]="mascotas" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
         [globalFilterFields]="['name']" [tableStyle]="{ 'min-width': '50rem' }">
 
-        <ng-template pTemplate="caption">
+        <ng-template pTemplate="caption" [ngStyle]="{ 'background-color': '#eee6d1' }">
             <div class="flex align-items-center justify-content-between">
 
                 <p-iconField iconPosition="left" class="ml-auto">
                     <p-inputIcon>
                         <i class="pi pi-search"></i>
                     </p-inputIcon>
-                    <input pInputText type="text" (input)="onFilter($event)" placeholder="Search keyword" />
+                    <input pInputText type="text" (input)="onFilter($event)"  />
                 </p-iconField>
             </div>
         </ng-template>

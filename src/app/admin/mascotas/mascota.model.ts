@@ -1,6 +1,7 @@
 export class MascotaModel {
     id!: number;
     name!: string;
+    descripcion!: string;
     birthday!: string;
     phone!: string;
     user_id!: number;

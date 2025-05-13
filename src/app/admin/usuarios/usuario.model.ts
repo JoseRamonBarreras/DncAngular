@@ -5,4 +5,6 @@ export class UsuarioModel {
     password!: string;
     rol!: string;
     favorite_pet!: string;
+    phone?: string;
+    address?: string;
 }

@@ -43,6 +43,7 @@ export class SharedMascotaService {
   public shared: MascotaModel = {
     id: 0,
     name: '',
+    descripcion: '',
     birthday: '',
     phone: '',
     user_id: 0,

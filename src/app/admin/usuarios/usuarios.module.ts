@@ -23,6 +23,7 @@ import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.co
 import { ListarUsuariosComponent } from './pages/listar-usuarios/listar-usuarios.component';
 import { SharedUsuarioService } from './usuario.service';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 
@@ -52,7 +53,8 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
     ReactiveFormsModule,
     InputIconModule,
     IconFieldModule,
-    ProgressBarModule
+    ProgressBarModule,
+    InputMaskModule
   ],
   providers:[
     SharedUsuarioService

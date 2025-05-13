@@ -44,6 +44,8 @@ export class EditarUsuarioComponent implements OnInit {
       this.userEditForm.get('Nombre')?.setValue(this.usuario.nombre);
       this.userEditForm.get('Correo')?.setValue(this.usuario.correo);
       this.userEditForm.get('FavoritePet')?.setValue(this.usuario.favorite_pet);
+      this.userEditForm.get('Phone')?.setValue(this.usuario.phone);
+      this.userEditForm.get('Address')?.setValue(this.usuario.address);
       this.showDialog();
       
     }, error => error);
@@ -55,7 +57,9 @@ export class EditarUsuarioComponent implements OnInit {
       Nombre: new FormControl('', [Validators.required]),
       Correo: new FormControl('', [Validators.required]),
       Roles: new FormControl('', [Validators.required]),
-      FavoritePet: new FormControl('', [Validators.required])
+      FavoritePet: new FormControl('', [Validators.required]),
+      Phone: new FormControl(''),
+      Address: new FormControl('')
     });
   }
 
@@ -76,6 +80,8 @@ export class EditarUsuarioComponent implements OnInit {
     this.usuario.password = this.userEditForm.value.Password;
     this.usuario.rol = this.userEditForm.value.Roles.id;
     this.usuario.favorite_pet = this.userEditForm.value.FavoritePet;
+    this.usuario.phone = this.userEditForm.value.Phone;
+    this.usuario.address = this.userEditForm.value.Address;
 
     this.usuarioService.updateUser(this.usuario).subscribe(resp => {
       console.log('from backend', resp);
