@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { MascotaModel } from '../../../admin/mascotas/mascota.model';
 import { PerfilService } from '../../perfil.service';
+import { UsuarioModel } from '../../../admin/usuarios/usuario.model';
 
 @Component({
   selector: 'app-perfil',
@@ -11,7 +12,9 @@ import { PerfilService } from '../../perfil.service';
 })
 export class PerfilComponent implements OnInit {
   mascotaId!: number;
-  mascota!: MascotaModel;
+  mascota: MascotaModel = new MascotaModel();
+  contactPhone: string = '';
+  contactAddress: string = '';
   fotoDemo: string = environment.fotoDemo;
   baseUrl = environment.baseUrl;
   baseQr = environment.baseQr;
@@ -32,23 +35,15 @@ export class PerfilComponent implements OnInit {
   obtenerMascota(id: number): void {
 
     this.perfilService.obtenerPerfil(id).subscribe(resp => {
-      
       console.log('From Backend', resp);
       this.mascota = resp.mascota;
+      this.contactPhone = resp.mascota.phone;
+      this.contactAddress = resp.mascota.address;
       console.log('Perfil', this.mascota);
+      console.log('contactPhone', this.contactPhone);
     }, error => {
       console.error('Error cargando mascota:', error);
     });
-  }
-
-  get claseImagen(): string {
-    if (!this.mascota || this.mascota.especie_id == null) {
-      return ''; 
-    }
-  
-    if (Number(this.mascota.especie_id) === 1) return 'img-perro';
-    if (Number(this.mascota.especie_id) === 2) return 'img-gato';
-    return '';
   }
 
   getEdad(fechaNacimiento: string): string {

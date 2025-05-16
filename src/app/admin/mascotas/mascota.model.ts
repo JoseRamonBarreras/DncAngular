@@ -3,7 +3,6 @@ export class MascotaModel {
     name!: string;
     descripcion!: string;
     birthday!: string;
-    phone!: string;
     user_id!: number;
     especie_id!: number;
     foto?: string;

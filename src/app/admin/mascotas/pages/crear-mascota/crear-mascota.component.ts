@@ -6,8 +6,10 @@ import Swal from 'sweetalert2';
 import { ComponentStateService } from '../../../shared/services/component-state.service';
 import { StateService } from '../../../shared/services/state.service';
 import { MascotaModel } from '../../mascota.model';
-import { MascotaService, SharedMascotaService } from '../../mascota.service';
+import { MascotaService, SharedMascotaService } from '../../services/mascota.service';
 import { environment } from '../../../../../environments/environment';
+import { UsuarioModel } from '../../../usuarios/usuario.model';
+import { UserProfileService } from '../../services/user-profile.service';
 
 type DialogPosition = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
 
@@ -22,6 +24,7 @@ export class CrearMascotaComponent {
   mascotaForm!: FormGroup;
   especies: any[] = [];
   mascota!: MascotaModel;
+  usuario: UsuarioModel = new UsuarioModel();
   loading: boolean = false;
 
   qrCodeUrl: string | null = null;
@@ -42,7 +45,8 @@ export class CrearMascotaComponent {
     private sharedMascota: SharedMascotaService,
     private componentState: ComponentStateService,
     private messageService: MessageService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private userProfileService: UserProfileService
   ) {
 
   }
@@ -73,6 +77,12 @@ export class CrearMascotaComponent {
       }
     });
 
+    this.userProfileService.getUser(Number(localStorage.getItem('user_id'))).subscribe(resp => {
+      this.usuario= new UsuarioModel();
+      this.usuario = resp;
+      console.log('usuario', this.usuario)
+    });
+
     this.listeners();
   }
 
@@ -89,7 +99,6 @@ export class CrearMascotaComponent {
       Descripcion: new FormControl(''),
       Birthday: new FormControl('', [Validators.required, this.yearLengthValidator]),
       Especie: new FormControl('', [Validators.required]),
-      Telefono: new FormControl(''),
     });
   }
 
@@ -106,8 +115,7 @@ export class CrearMascotaComponent {
       Nombre: this.mascota.name,
       Descripcion: this.mascota.descripcion,
       Birthday: this.mascota.birthday,
-      Especie: +this.mascota.especie_id,
-      Telefono: this.mascota.phone
+      Especie: +this.mascota.especie_id
     });
 
     if (this.mascota.foto) {
@@ -165,7 +173,6 @@ export class CrearMascotaComponent {
     this.mascota.descripcion = this.mascotaForm.value.Descripcion;
     this.mascota.birthday = this.mascotaForm.value.Birthday;
     this.mascota.especie_id = this.mascotaForm.value.Especie;
-    this.mascota.phone = this.mascotaForm.value.Telefono;
     this.mascota.user_id = Number(localStorage.getItem('user_id'));
     if (!this.fotoEditada && this.isEditMode) {
       delete this.mascota.foto;

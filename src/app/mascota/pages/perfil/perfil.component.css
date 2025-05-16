@@ -1,39 +1,16 @@
-.carta {
-    width: 100%;
-    display: block;
-    padding-bottom: 200px;
-    border-radius: 10px;
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre elementos */
 }
 
-.img-gato {
-    background-color: #431f39;
-    color: #f8e5d4;
+.icon-user {
+  /* font-size: 1.2rem; */
 }
 
-.img-perro {
-    background-color: #f8e5d4;
-    color: #431f39;
-}
-
-.imagen-mascota {
-    padding-top: 100px;
-
-}
-
-.mascota-nombre {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 50px;
-    font-weight:bolder
-}
-
-.mascota-fecha {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 30px;
-    font-weight: 600;
-}
-
-.mascota-telefono {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 30px;
-    font-weight: 600;
+.phone-number {
+  color: #B73A24;
+  text-align: center;
+  margin-right: auto; /* Opcional si deseas empujar el botón a la derecha */
 }

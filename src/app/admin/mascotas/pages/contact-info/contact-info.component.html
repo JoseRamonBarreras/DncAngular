@@ -1,0 +1,28 @@
+<form [formGroup]="contactForm" (ngSubmit)="guardar()">
+    <div class="grid" style="margin-bottom: 10px;">
+        <div class="col">
+            <p-floatLabel>
+                <p-inputMask mask="(999) 999-9999" formControlName="Phone" placeholder="(999) 999-9999" />
+                <label for="phone">Teléfono de contacto</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+                <p-floatLabel>
+                <input type="text" pInputText id="address" formControlName="Address" style="width: 100%;" />
+                <label for="address">Direccion</label>
+            </p-floatLabel>
+        </div>
+    </div>
+
+    <div class="grid" style="margin-bottom: 10px;">
+        <div class="col-3" style="display: flex; justify-content: flex-end;">
+            <p-button type="submit" label="Actualizar" severity="primary" [disabled]="!contactForm.valid" />
+        </div>
+    </div>
+
+    <div style="margin-top: 25px;" *ngIf="loading">
+        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    </div>
+</form>

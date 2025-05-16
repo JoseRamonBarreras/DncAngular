@@ -1,25 +1,27 @@
-<div class="card">
-    <div class="grid">
-        <div class="col">
-            <div *ngIf="mascota" class="carta" [ngClass]="claseImagen">
-                <div [ngClass]="claseImagen" style="padding-top: 0px; border-radius: 10px;">
-                    <div class="text-center imagen-mascota">
-                        <img alt="Foto de Mascota"
-                            [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'"
-                            style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;" />
-                    </div>
-                </div>
+<p-card header="{{ mascota.name }}" subheader="{{ mascota.descripcion }}"
+    [style]="{ width: '360px', backgroundImage: 'url(/img/pet-background.png)', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', margin: '0 auto' }">
+    <ng-template pTemplate="header">
+        <img alt="Foto de Mascota"
+            [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'" />
+    </ng-template>
 
-                <div class="p-3 text-center" [ngClass]="claseImagen">
-                    <p class="m-0 mascota-nombre">{{ mascota.name }}</p>
-                    <p class="m-0 mascota-fecha" *ngIf="mascota.birthday">
-                        Edad: <strong>{{ getEdad(mascota.birthday) }}</strong>
-                      </p>
-                     
-                    <p class="m-0 mascota-telefono">Teléfono: <strong>{{ mascota.phone || 'No disponible' }}</strong>
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="card-content">
+        <i class="pi pi-gift icon-gift" style="font-size: 20px; color: #77352C;"></i>
+        <h3 class="phone-number">{{ getEdad(mascota.birthday) }}</h3>
     </div>
-</div>
+
+    <div class="card-content">
+        <i class="pi pi-user icon-user" style="font-size: 20px; color: #77352C;"></i>
+        <h3 class="phone-number">{{ contactPhone || 'No
+            disponible' }}</h3>
+        <button pButton type="button" icon="pi pi-phone"
+            class="p-button-rounded p-button-text p-button-sm p-button-success"></button>
+    </div>
+
+    <div class="card-content">
+        <i class="pi pi-map-marker map-marker" style="font-size: 20px; color: #77352C;"></i>
+        <h3 class="phone-number">{{ contactAddress || 'No
+            disponible' }}</h3>
+    </div>
+
+</p-card>

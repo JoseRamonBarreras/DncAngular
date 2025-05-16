@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { MascotaModel } from '../../mascota.model';
 import { Table } from 'primeng/table';
 import Swal from 'sweetalert2';
-import { MascotaService, SharedMascotaService } from '../../mascota.service';
+import { MascotaService, SharedMascotaService } from '../../services/mascota.service';
 import { StateService } from '../../../shared/services/state.service';
 import { environment } from '../../../../../environments/environment';
 

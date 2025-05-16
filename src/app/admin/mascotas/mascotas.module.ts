@@ -20,19 +20,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { SharedMascotaService } from './mascota.service';
+import { SharedMascotaService } from './services/mascota.service';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropImageComponent } from './pages/crear-mascota/components/crop-image/crop-image.component'; 
 import { MessageService } from 'primeng/api';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ContactInfoComponent } from './pages/contact-info/contact-info.component';
 
 
 @NgModule({
   declarations: [
     ListarMascotasComponent,
     CrearMascotaComponent,
-    CropImageComponent
+    CropImageComponent,
+    ContactInfoComponent
   ],
   imports: [
     CommonModule,

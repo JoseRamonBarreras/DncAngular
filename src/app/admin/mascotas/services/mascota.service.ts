@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../core/http.service';
+import { HttpService } from '../../../core/http.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MascotaModel } from './mascota.model';
+import { MascotaModel } from '../mascota.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,6 @@ export class SharedMascotaService {
     name: '',
     descripcion: '',
     birthday: '',
-    phone: '',
     user_id: 0,
     especie_id: 0
   };
