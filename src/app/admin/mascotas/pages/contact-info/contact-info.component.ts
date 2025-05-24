@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UsuarioModel } from '../../../usuarios/usuario.model';
 import { UserProfileService } from '../../services/user-profile.service';
 import Swal from 'sweetalert2';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-contact-info',
@@ -17,6 +18,7 @@ export class ContactInfoComponent implements OnInit {
 
   constructor(
     private profileService: UserProfileService,
+    private messageService: MessageService,
   ) {
 
   }
@@ -50,22 +52,30 @@ export class ContactInfoComponent implements OnInit {
 
   guardar() {
     this.loading = true;
+
     this.usuario.phone = this.contactForm.value.Phone;
     this.usuario.address = this.contactForm.value.Address;
     console.log('Profile', this.usuario);
 
-    // this.usuarioService.updateUser(this.usuario).subscribe(resp => {
-    //   console.log('from backend', resp);
-    //   this.stateService.updated();
-    //   this.visible = false;
-    //   Swal.fire({ title: 'Usuario actualizado correctamente', text: '', icon: 'success' });
-
-    // }, error => {
-    //   console.log('error', error);
-    //   this.stateService.cancelarEditar();
-    //   this.visible = false;
-    //   Swal.fire({ title: 'Error al editar el usuario', text: '', icon: 'warning' });
-    // });
+    this.profileService.guardar(this.usuario).subscribe(resp => {
+      console.log('from backend', resp);
+      this.messageService.add({
+        key: 'contact',
+        severity: 'info',
+        summary: 'Guardado',
+        detail: 'Informacion actualizada'
+      });
+      this.loading = false;
+    }, error => {
+      console.log('error', error);
+      this.messageService.add({
+        key: 'contact',
+        severity: 'danger',
+        summary: 'Error',
+        detail: 'Error al guardar'
+      });
+      this.loading = false;
+    });
   }
 
 }

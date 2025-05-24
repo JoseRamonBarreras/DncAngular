@@ -1,37 +1,51 @@
-<p-card header="Iniciar Sesión" subheader="Ingresa tu correo y password" [style]="{ maxWidth: '500px', margin: '0 auto', marginTop: '100px'}"
-    fxLayoutAlign="center center">
+<div class="login-section">
 
-    <div class="flex gap-3 mt-1">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%;">
-            <div style="margin-bottom: 25px;">
-                <p-floatLabel>
-                    <input type="text" pInputText id="email" formControlName="email"  style="width: 100%;"/>
-                    <label for="email">Email</label>
-                </p-floatLabel>
-            </div>
-      
-            <div style="margin-bottom: 25px;">
-            <p-floatLabel>
-                <input type="password" pInputText id="password" formControlName="password" style="width: 100%;"/>
-                <label for="password">Password</label>
-            </p-floatLabel>
-            </div>
-
-            <p-button type="submit" label="Login" class="w-full" styleClass="w-full"/>
-
-            <div style="margin-top: 25px;" *ngIf="loading">
-                <p-progressBar mode="indeterminate" [style]="{'height': '6px'}" />
-            </div>
-            
-        </form>
+    <div style="height:100px" style="text-align: center; padding-top:30px; padding-bottom: 20px;">
+        <img [src]="logo" alt="Logo" class="logo" style="max-width: 300px;" />
     </div>
 
-</p-card>
+    <p-card header="Iniciar Sesión" subheader="Ingresa tu correo y password"
+        [style]="{ maxWidth: '500px', margin: '0 auto'}" fxLayoutAlign="center center">
 
-<!-- Leyenda y botón de registro -->
-<div style="max-width: 465px; margin: 15px auto 0; text-align: center;">
-    <small style="display: block; margin-bottom: 8px; color: #B73A24;">
-      ¿Aún no tienes una cuenta? <br> Regístrate aquí.
-    </small>
-    <p-button label="Crear cuenta" styleClass="p-button-success w-full" ></p-button>
-  </div>
+        <div class="flex gap-3 mt-1">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%;">
+                <div style="margin-bottom: 25px;">
+                    <p-floatLabel>
+                        <input type="text" pInputText id="email" formControlName="email" style="width: 100%;" />
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <p-floatLabel>
+                        <input type="password" pInputText id="password" formControlName="password"
+                            style="width: 100%;" />
+                        <label for="password">Password</label>
+                    </p-floatLabel>
+                </div>
+
+                <p-button type="submit" label="Login" class="w-full" styleClass="w-full" />
+
+                <div style="margin-top: 25px;" *ngIf="loading">
+                    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}" />
+                </div>
+
+            </form>
+        </div>
+
+    </p-card>
+
+    <!-- Leyenda y botón de registro -->
+    <div style="max-width: 465px; margin: 15px auto 0; text-align: center;">
+        <small style="display: block; margin-bottom: 8px; color: #1c1c1c;">
+            ¿Aún no tienes una cuenta? <br> Regístrate aquí.
+        </small>
+        <p-button label="Crear cuenta" styleClass="p-button-success w-full"></p-button>
+    </div>
+
+
+</div>
+
+<div style="height:100px" style="text-align: center; max-width: 1000px; margin:0 auto;">
+    <img [src]="catDog" alt="Mascotas" style="width: 100%; text-align: center; margin:0 auto;" />
+</div>

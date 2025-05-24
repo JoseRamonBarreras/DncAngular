@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl!: string;
   error = '';
+  logo!: string;
+  catDog!: string;
 
   constructor(
     private router: Router,
@@ -27,6 +29,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+     this.logo = "./img/logo_PetQR.png";
+     this.catDog = "./img/dog-cat-uno.jpg";
     if (localStorage.getItem('token') != null) {
       this.redirect();
     }

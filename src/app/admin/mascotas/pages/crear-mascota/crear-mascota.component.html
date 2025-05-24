@@ -93,21 +93,21 @@
                             [src]="mascota.foto ? (baseUrl + mascota.foto) : './img/icons/petdemo.png'" />
                     </ng-template>
 
-                    <div class="card-content">
-                        <i class="pi pi-gift icon-gift" style="font-size: 20px; color: #77352C;"></i>
+                    <div class="card-content profile-info">
+                        <i class="pi pi-gift icon-gift" style="font-size: 20px; color: #6dce7b;"></i>
                         <h3 class="phone-number">{{ getEdad(mascotaForm.value.Birthday) }}</h3>
                     </div>
 
-                    <div class="card-content">
-                        <i class="pi pi-user icon-user" style="font-size: 20px; color: #77352C;"></i>
+                    <div class="card-content profile-info">
+                        <i class="pi pi-user icon-user" style="font-size: 20px; color: #d5ae38;"></i>
                         <h3 class="phone-number">{{ usuario.phone || 'No
                             disponible' }}</h3>
                         <button pButton type="button" icon="pi pi-phone"
                             class="p-button-rounded p-button-text p-button-sm p-button-success"></button>
                     </div>
 
-                    <div class="card-content">
-                        <i class="pi pi-map-marker map-marker" style="font-size: 20px; color: #77352C;"></i>
+                    <div class="card-content profile-info">
+                        <i class="pi pi-map-marker map-marker" style="font-size: 20px; color: #f05858;"></i>
                         <h3 class="phone-number">{{ usuario.address || 'No
                             disponible' }}</h3>
                     </div>

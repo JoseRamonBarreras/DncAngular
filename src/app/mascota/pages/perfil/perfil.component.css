@@ -10,7 +10,12 @@
 }
 
 .phone-number {
-  color: #B73A24;
+  color: #281d2d;
   text-align: center;
-  margin-right: auto; /* Opcional si deseas empujar el botón a la derecha */
+  margin-right: auto; 
+}
+
+.profile-info{
+  padding-left: 10px; padding-right: 10px; background-color: #fff; border-radius: 5px;
+  margin-bottom: 10px;
 }
