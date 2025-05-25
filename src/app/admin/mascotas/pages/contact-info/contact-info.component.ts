@@ -15,6 +15,7 @@ export class ContactInfoComponent implements OnInit {
   roles: any[] = [];
   usuario!: UsuarioModel;
   loading: boolean = false;
+  privacyControl: boolean = false;
 
   constructor(
     private profileService: UserProfileService,
@@ -29,6 +30,7 @@ export class ContactInfoComponent implements OnInit {
     this.profileService.getUser(Number(localStorage.getItem('user_id'))).subscribe(resp => {
       this.usuario = new UsuarioModel();
       this.usuario = resp;
+      this.privacyControl = !!resp.privacy_control;
       console.log('profile', this.usuario);
       this.setFormValues();
     });
@@ -48,6 +50,31 @@ export class ContactInfoComponent implements OnInit {
 
     });
     // this.cd.detectChanges();
+  }
+
+  onPrivacyToggle(event: boolean) {
+    this.privacyControl = event;
+    console.log('Privacidad activada:', this.privacyControl);
+
+    let params = {userId: Number(localStorage.getItem('user_id')), control: event };
+
+     this.profileService.switchControl(params).subscribe(resp => {
+      console.log('from backend', resp);
+      this.messageService.add({
+        key: 'contact',
+        severity: 'info',
+        summary: 'Guardado',
+        detail: 'Control de privacidad'
+      });
+    }, error => {
+      console.log('error', error);
+      this.messageService.add({
+        key: 'contact',
+        severity: 'danger',
+        summary: 'Error',
+        detail: 'Error al guardar'
+      });
+    });
   }
 
   guardar() {

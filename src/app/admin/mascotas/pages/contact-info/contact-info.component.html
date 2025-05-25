@@ -1,3 +1,13 @@
+
+
+<h3 style="color: #3a2c41;">Control de privacidad</h3>
+<p>Mostrar la información de contacto solo cuando tu mascota se pierda.</p>
+<p-inputSwitch 
+id="privacySwitch"
+[(ngModel)]="privacyControl"
+(onChange)="onPrivacyToggle($event.checked)">
+</p-inputSwitch>
+
 <form [formGroup]="contactForm" (ngSubmit)="guardar()">
     <div class="grid" style="margin-bottom: 10px;">
         <div class="col">

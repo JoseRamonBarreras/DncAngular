@@ -17,7 +17,11 @@ export class UserProfileService {
   }
 
   guardar(usuario: UsuarioModel): Observable<any> {
-      return this.httpService.post(this.end_point, usuario);
-    }
+    return this.httpService.post(this.end_point, usuario);
+  }
+
+  switchControl(params: Object): Observable<any> {
+    return this.httpService.put(this.end_point + '/privacy_control', params);
+  }
 
 }

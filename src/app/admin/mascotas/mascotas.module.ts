@@ -16,7 +16,7 @@ import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -27,6 +27,7 @@ import { CropImageComponent } from './pages/crear-mascota/components/crop-image/
 import { MessageService } from 'primeng/api';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ContactInfoComponent } from './pages/contact-info/contact-info.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 @NgModule({
@@ -52,13 +53,15 @@ import { ContactInfoComponent } from './pages/contact-info/contact-info.componen
     RippleModule,
     MessagesModule,
     MessageModule,
+    FormsModule,  
     ReactiveFormsModule,
     InputIconModule,
     IconFieldModule,
     ProgressBarModule,
     FileUploadModule,
     ImageCropperModule,
-    InputMaskModule
+    InputMaskModule,
+    InputSwitchModule
   ],
   providers: [
     SharedMascotaService,
