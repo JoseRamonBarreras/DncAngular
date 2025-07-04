@@ -45,8 +45,7 @@ export class ContactInfoComponent implements OnInit {
 
   setFormValues() {
     this.contactForm.patchValue({
-      Phone: this.usuario.phone,
-      Address: this.usuario.address,
+      Phone: this.usuario.phone
 
     });
     // this.cd.detectChanges();
@@ -81,7 +80,6 @@ export class ContactInfoComponent implements OnInit {
     this.loading = true;
 
     this.usuario.phone = this.contactForm.value.Phone;
-    this.usuario.address = this.contactForm.value.Address;
     console.log('Profile', this.usuario);
 
     this.profileService.guardar(this.usuario).subscribe(resp => {

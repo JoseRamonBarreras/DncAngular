@@ -45,10 +45,7 @@ export class CrearUsuarioComponent implements OnInit {
       Nombre: new FormControl('', [Validators.required]),
       Correo: new FormControl('', [Validators.required]),
       Password: new FormControl('', [Validators.required]),
-      Roles: new FormControl('', [Validators.required]),
-      FavoritePet: new FormControl('', [Validators.required]),
-      Phone: new FormControl(''),
-      Address: new FormControl('')
+      Phone: new FormControl('', [Validators.pattern(/^\d{10}$/)])
     });
   }
 
@@ -68,10 +65,9 @@ export class CrearUsuarioComponent implements OnInit {
     this.usuario.nombre = this.userForm.value.Nombre;
     this.usuario.correo = this.userForm.value.Correo;
     this.usuario.password = this.userForm.value.Password;
-    this.usuario.rol = this.userForm.value.Roles.id;
-    this.usuario.favorite_pet = this.userForm.value.FavoritePet;
     this.usuario.phone = this.userForm.value.Phone;
-    this.usuario.address = this.userForm.value.Address;
+
+    console.log('Cliente Usuario', this.usuario)
 
     this.usuarioService.saveUser(this.usuario).subscribe(resp => {
       console.log('resp', resp);

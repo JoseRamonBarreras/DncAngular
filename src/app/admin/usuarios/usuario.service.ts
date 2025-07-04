@@ -7,7 +7,7 @@ import { UsuarioModel } from './usuario.model';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private end_point: string = 'dashboard';
+  private end_point: string = 'users';
 
   constructor( private httpService: HttpService ) { }
 
@@ -17,20 +17,6 @@ export class UsuarioService {
 
   getRoles (): Observable<any> {
     return this.httpService.get( this.end_point + '/roles' );
-  }
-
-  getEmpresas (): Observable<any> {
-    return this.httpService.get( this.end_point + '/empresas' );
-  }
-
-  saveRol( rol: string ): Observable<any> {
-    let params = `?rol=${rol}`;
-    return this.httpService.post( this.end_point + '/roles/guardar' + params );
-  }
-
-  updateRol( id: number, rol: string ): Observable<any> {
-    let params = `?id=${id}&rol=${rol}`;
-    return this.httpService.put( this.end_point + '/roles/actualizar/' + params);
   }
 
   getUsers (): Observable<any> {
@@ -43,17 +29,17 @@ export class UsuarioService {
   }
 
   saveUser( usuario: UsuarioModel): Observable<any> {
-    return this.httpService.post( this.end_point + '/usuario/guardar', usuario );
+    return this.httpService.post( this.end_point + '/usuario/store', usuario );
   }
 
   updateUser( usuario: UsuarioModel): Observable<any> {
     let params = `${usuario.id}`;
-    return this.httpService.put( this.end_point + '/usuario/actualizar/' + params, usuario );
+    return this.httpService.put( this.end_point + '/usuario/update/' + params, usuario );
   }
 
   deleteUser( id: number ): Observable<any> {
     let params = `?id=${id}`;
-    return this.httpService.delete( this.end_point + '/usuario/eliminar' + params);
+    return this.httpService.delete( this.end_point + '/usuario/delete' + params);
   }
 
   resetPassword( id: number, password: string ): Observable<any> {
@@ -61,10 +47,6 @@ export class UsuarioService {
     return this.httpService.put( this.end_point + '/usuario/reset_password' + params);
   }
 
-  getProfileFromRecursosHumanos(empresa: number, empleado: number): Observable<any> {
-    let params = `?empresa=${empresa}&empleado=${empleado}`;
-    return this.httpService.get( this.end_point + '/usuario/profile/rh' + params);
-  }
 }
 
 export class SharedUsuarioService {
@@ -73,8 +55,6 @@ export class SharedUsuarioService {
     nombre: '',
     correo: '',
     password: '',
-    rol: '',
-    favorite_pet: ''
   };
 
   private messageSource = new BehaviorSubject<UsuarioModel>(this.shared);

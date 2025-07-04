@@ -101,5 +101,31 @@ export class ListarUsuariosComponent implements OnInit {
     });
   }
 
+  getStatusSeverity(status: string): 'success' | 'warning' | 'danger' | 'info' {
+    switch (status.toLowerCase()) {
+      case 'activo':
+        return 'success';
+      case 'pendiente':
+        return 'warning';
+      case 'suspendido':
+        return 'danger';
+      default:
+        return 'info';
+    }
+  }
+
+  getPlanSeverity(plan: string): 'info' | 'success' | 'warning' | 'danger' {
+    switch (plan.toLowerCase()) {
+      case 'gratis':
+        return 'info';
+      case 'basico':
+        return 'success';
+      case 'pro':
+        return 'warning';
+      default:
+        return 'danger'; // para cualquier otro plan no reconocido
+    }
+  }
+
 
 }

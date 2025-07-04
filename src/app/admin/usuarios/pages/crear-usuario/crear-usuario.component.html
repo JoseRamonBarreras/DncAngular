@@ -4,27 +4,22 @@
 
         <form [formGroup]="userForm" (ngSubmit)="guardar()">
             <div class="grid" style="margin-bottom: 10px;">
-
                 <div class="col">
                     <p-inputGroup>
-                        <p-inputGroupAddon>Nombre</p-inputGroupAddon>
+                        <p-inputGroupAddon>Nombre (Cliente o Negocio)</p-inputGroupAddon>
                         <input type="text" pInputText placeholder="Nombre" formControlName="Nombre" />
                     </p-inputGroup>
                 </div>
                 <div class="col">
                     <p-inputGroup>
-                        <p-inputGroupAddon>Mascota Favorita</p-inputGroupAddon>
-                        <input type="text" pInputText placeholder="FavoritePet" formControlName="FavoritePet" />
+                        <p-inputGroupAddon>Teléfono (opcional)</p-inputGroupAddon>
+                        <input type="tel" pInputText formControlName="Phone" placeholder="6861234567 (solo dígitos)" />
                     </p-inputGroup>
                 </div>
             </div>
 
 
             <div class="grid" style="margin-bottom: 10px;">
-                <div class="col-3">
-                    <p-dropdown formControlName="Roles" [options]="roles" optionLabel="rol"
-                        placeholder="Selecciona un Rol" />
-                </div>
                 <div class="col">
                     <p-inputGroup>
                         <p-inputGroupAddon>Correo</p-inputGroupAddon>
@@ -38,19 +33,6 @@
                     </p-inputGroup>
                 </div>
 
-            </div>
-
-            <div class="grid" style="margin-bottom: 10px;">
-                <div class="col-4">
-                    <small class="text-muted">Teléfono de contacto. (opcional)</small>
-                    <p-inputMask mask="(999) 999-9999" formControlName="Phone" placeholder="(999) 999-9999" />
-                </div>
-                <div class="col-8">
-                    <p-inputGroup>
-                        <p-inputGroupAddon>Direccion</p-inputGroupAddon>
-                        <input type="text" pInputText formControlName="Address" />
-                    </p-inputGroup>
-                </div>
             </div>
 
             <div class="grid" style="margin-bottom: 10px;">

@@ -16,7 +16,6 @@ export class EditarUsuarioComponent implements OnInit {
   visible: boolean = false;
   position: DialogPosition = 'top';
   userEditForm!: FormGroup;
-  roles: any[] = [];
   usuario!: UsuarioModel;
 
   loading: boolean = false;
@@ -30,36 +29,21 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm()
-
-    this.usuarioService.getRoles().subscribe(resp => {
-      this.roles = resp;
-      console.log('R', this.roles);
-      this.userEditForm.get('Roles')?.setValue(this.roles.find(e => e.rol === this.usuario.rol));
-    }, error => error);
-
     this.sharedUsuario.current.subscribe(resp => {
       this.usuario = resp;
       console.log('Usuario current', this.usuario);
-      this.userEditForm.get('Nombre')?.setValue(this.usuario.nombre);
-      this.userEditForm.get('Correo')?.setValue(this.usuario.correo);
-      this.userEditForm.get('FavoritePet')?.setValue(this.usuario.favorite_pet);
-      this.userEditForm.get('Phone')?.setValue(this.usuario.phone);
-      this.userEditForm.get('Address')?.setValue(this.usuario.address);
+      this.createForm();
       this.showDialog();
-      
+
     }, error => error);
   }
 
 
   createForm() {
     this.userEditForm = new FormGroup({
-      Nombre: new FormControl('', [Validators.required]),
-      Correo: new FormControl('', [Validators.required]),
-      Roles: new FormControl('', [Validators.required]),
-      FavoritePet: new FormControl('', [Validators.required]),
-      Phone: new FormControl(''),
-      Address: new FormControl('')
+      Nombre: new FormControl(this.usuario?.nombre || '', [Validators.required]),
+      Correo: new FormControl(this.usuario?.correo || '', [Validators.required]),
+      Phone: new FormControl(this.usuario?.phone || '', [Validators.pattern(/^\d{10}$/)])
     });
   }
 
@@ -77,11 +61,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.loading = true;
     this.usuario.nombre = this.userEditForm.value.Nombre;
     this.usuario.correo = this.userEditForm.value.Correo;
-    this.usuario.password = this.userEditForm.value.Password;
-    this.usuario.rol = this.userEditForm.value.Roles.id;
-    this.usuario.favorite_pet = this.userEditForm.value.FavoritePet;
     this.usuario.phone = this.userEditForm.value.Phone;
-    this.usuario.address = this.userEditForm.value.Address;
 
     this.usuarioService.updateUser(this.usuario).subscribe(resp => {
       console.log('from backend', resp);

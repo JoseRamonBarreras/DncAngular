@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-     this.logo = "./img/logo_PetQR.png";
-     this.catDog = "./img/dog-cat-uno.jpg";
+     this.logo = "./img/pedidosexpres.png";
+     //this.catDog = "./img/dog-cat-uno.jpg";
     if (localStorage.getItem('token') != null) {
       this.redirect();
     }
@@ -95,7 +95,12 @@ export class LoginComponent implements OnInit {
 
   private redirect() { 
     console.log('redirecttttt');
-    this.router.navigate(['/admin']); 
+    if(localStorage.getItem('roles') == 'SISTEMAS'){
+      this.router.navigate(['/admin/usuarios']); 
+    } else{
+      this.router.navigate(['/admin/ajustes']); 
+    }
+    
   }
 
 }

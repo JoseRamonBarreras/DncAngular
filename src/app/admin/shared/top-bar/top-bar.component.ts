@@ -36,7 +36,7 @@ export class TopBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logo = "./img/logo_PetQR.png";
+    this.logo = "./img/pedidosexpres.png";
     this.menuItems = this.getMenu();
     this.seccionName.current.subscribe(titulo => {
       console.log('Li', titulo);
@@ -53,9 +53,9 @@ export class TopBarComponent implements OnInit {
   private getMenu() {
     const menu = [
       {
-        label: 'Dashboard',
-        icon: 'pi pi-home',
-        routerLink: 'dashboard',
+        label: 'Ajustes',
+        icon: 'pi pi-cog',
+        routerLink: 'ajustes',
         command: () => this.sidebarVisible = false
       },
       {
@@ -84,7 +84,7 @@ export class TopBarComponent implements OnInit {
       // },
     ];
 
-    if (this.rol === 'SISTEMAS' || this.rol === 'ADMINISTRADOR') {
+    if (this.rol === 'SISTEMAS') {
       menu.push({
         label: 'Usuarios',
         icon: 'pi pi-users',

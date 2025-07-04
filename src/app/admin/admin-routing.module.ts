@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from '../core/role.guard';
 
 const routes: Routes = [
+  // { 
+  //   path: 'dashboard', 
+  //   canActivate: [RoleGuard],
+  //   data: { acceso: "DASHBOARD" },
+  //   loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) 
+  // },
   { 
-    path: 'dashboard', 
+    path: 'ajustes', 
     canActivate: [RoleGuard],
-    data: { acceso: "DASHBOARD" },
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) 
+    data: { acceso: "AJUSTES" },
+    loadChildren: () => import('./ajustes/ajustes.module').then(m => m.AjustesModule) 
   },
   { 
     path: 'usuarios', 
@@ -22,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./mascotas/mascotas.module').then(m => m.MascotasModule) 
   },
   {
-    path: '**', redirectTo: 'dashboard'
+    path: '**', redirectTo: 'ajustes'
   }
 ];
 

@@ -1,7 +1,7 @@
 <p-card styleClass="custom-card">
     <ng-template pTemplate="header">
         <div class="card-header">
-            <span class="card-title">Usuarios</span>
+            <span class="card-title">Usuarios (Clientes)</span>
             <p-button label="Crear" severity="success" (onClick)="crear()" />
         </div>
     </ng-template>
@@ -23,19 +23,40 @@
 
         <ng-template pTemplate="header">
             <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Email</th>
+                <th>FechaRegistro</th>
+                <th>FechaVencimiento</th>
+                <th>Status</th>
+                <th>Plan</th>
+
                 <th>Usuario</th>
-                <th>Correo</th>
+                <th>Nombre</th>
                 <th>Rol</th>
-                <th>Mascota Favorita</th>
+
                 <th>Acciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr>
+                <td>{{ user.cliente.id }}</td>
+                <td>{{ user.cliente.nombre }}</td>
+                <td>{{ user.cliente.email }}</td>
+                <td>{{ user.cliente.fecha_registro | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ user.cliente.fecha_vencimiento | date: 'yyyy-MM-dd' }}</td>
+                <td>
+                    <p-tag [value]="user.cliente.status.nombre"
+                        [severity]="getStatusSeverity(user.cliente.status.nombre)">
+                    </p-tag>
+                </td>
+                <td>
+                    <p-tag [value]="user.cliente.plan.nombre" [severity]="getPlanSeverity(user.cliente.plan.nombre)">
+                    </p-tag>
+                </td>
+                <td>{{ user.id }}</td>
                 <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles[0].rol }}</td>
-                <td>{{ user.profile.favorite_pet }}</td>
+                <td>{{ user.roles[0].name }}</td>
                 <td>
                     <p-button label="Editar" icon="pi pi-user-edit" severity="warning" size="small"
                         class="custom-button" (onClick)="editar(user)" />
