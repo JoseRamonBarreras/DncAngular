@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('roles', response.role);
     localStorage.setItem('permisos', JSON.stringify(response.permissions));
     localStorage.setItem('profile', JSON.stringify(response.profile));
+    localStorage.setItem('cliente_id', response.cliente.id)
   }
 
   private showMessage(): void {

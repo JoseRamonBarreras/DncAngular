@@ -19,3 +19,11 @@ html {
 .p-card {
   color: #363636;
 }
+
+.borde-negro {
+  border: 1px solid black;
+}
+
+.borde-naranja{
+  border: 1px solid #ff6c03;
+}

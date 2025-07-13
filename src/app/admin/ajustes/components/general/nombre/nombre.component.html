@@ -1,0 +1,40 @@
+<div class="card">
+    <p-dialog header="Actualizar Nombre" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '50rem'}" (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+            <div class="col-6">
+                <p-toast></p-toast>
+                <form [formGroup]="nombreForm" (ngSubmit)="guardar()">
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>Nombre</p-inputGroupAddon>
+                                <input type="text" pInputText placeholder="Nombre" formControlName="Nombre" />
+                            </p-inputGroup>
+                        </div>
+                    </div>
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button label="Cancelar" severity="secondary"
+                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }"
+                                styleClass="p-button-cancelar" />
+                            <p-button type="submit" label="Guardar"
+                                severity="success" [disabled]="!nombreForm.valid">
+                            </p-button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </p-dialog>
+</div>

@@ -1,10 +1,77 @@
 <p-card header="Ajustes">
+
+  <ng-container *ngIf="isLoading; else ajustesGrid">
+    <app-general-skeleton></app-general-skeleton>
+  </ng-container>
+
+  <ng-template #ajustesGrid>
     <div class="grid">
-        <div class="col-8">
-            Logo
+      <div class="col-12 md:col-4">
+        <div
+          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+          (click)="subirLogo()">
+          <div class="flex align-items-center gap-3">
+            <!-- <img [src]="logoUrl || logoPlaceholder" alt="Logo Preview" class="border-round"
+              style="width: 50px; height: 50px; object-fit: cover; min-width: 50px;" /> -->
+              
+            <img [src]="generalCliente.logo_url ? (negocioImageUrl + generalCliente.logo_url) : logoPlaceholder" alt="Logo Preview" class="border-round"
+              style="width: 50px; height: 50px; object-fit: cover; min-width: 50px;" />
+
+            <div>
+              <p class="font-bold m-0">Logo</p>
+              <small class="text-color-secondary">Haz clic para subir logo</small>
+            </div>
+          </div>
         </div>
-        <div class="col-4">
-            preview
+      </div>
+
+      <div class="col-12 md:col-4">
+        <div
+          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+          (click)="subirPortada()">
+          <div class="flex align-items-center gap-3">
+            <img [src]="generalCliente.portada_url ? (negocioImageUrl + generalCliente.portada_url) : portadaPlaceholder" alt="Portada Preview" class="border-round"
+              style="width: 80px; height: 50px; object-fit: cover; min-width: 80px;" />
+            <div>
+              <p class="font-bold m-0">Portada</p>
+              <small class="text-color-secondary">Haz clic para subir portada</small>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="col-12 md:col-4" *ngIf="generalCliente">
+        <div
+          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+          (click)="editarNombre()">
+          <div class="flex align-items-center gap-3">
+            <div class="border-round flex justify-content-center align-items-center"
+              style="width: 50px; height: 50px; background-color: var(--surface-100);">
+              <i class="pi pi-pencil text-2xl text-blue-600"></i>
+            </div>
+            <div>
+              <p class="font-bold m-0 text-lg">{{ generalCliente.nombre || 'Mi negocio' }}</p>
+              <small class="text-color-secondary">Haz clic para editar el nombre</small>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="grid">
+      <div class="col-12 md:col-4">
+        <img [src]="baseQr + generalCliente.id" alt="Código QR" /><br>
+        <button pButton type="button" icon="pi pi-download" label="Descargar QR"
+          (click)="descargarQr(generalCliente.id)">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+
 </p-card>
+
+<app-logo *ngIf="displayLogo"></app-logo>
+<app-portada *ngIf="displayPortada"></app-portada>
+<app-nombre *ngIf="displayNombre"></app-nombre>
+<p-toast position="bottom-right" key="ajustes"></p-toast>

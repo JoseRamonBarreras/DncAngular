@@ -1,0 +1,27 @@
+<p-dialog header="Actualizar Portada" [modal]="true" [(visible)]="visible" [position]="position"
+    [style]="{ width: '50rem' }" (onHide)="cancelar()">
+    <div class="grid">
+        <div class="col-6">
+            <input type="file" (change)="fileChangeEvent($event)" />
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="5 / 3.3"
+                format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded($event)"
+                (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+        </div>
+        <div class="col-6">
+            <p>Preview Image</p>
+            <img [src]="croppedImage" style="width: 100%; max-width: 300px;" />
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <div class="text-right mt-4">
+                <button type="button" pButton label="Cancelar" (click)="cancelar()" class="p-button-secondary"
+                    style="margin-right: 5px;"></button>
+                <button type="button" pButton label="Guardar" (click)="guardar()" [disabled]="!croppedImage"
+                    class="p-button-success mr-2"></button>
+
+            </div>
+        </div>
+    </div>
+</p-dialog>
+

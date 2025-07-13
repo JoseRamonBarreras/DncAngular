@@ -25,6 +25,14 @@ import { AjustesRoutingModule } from './ajustes-routing.module';
 import { AjustesComponent } from './pages/ajustes/ajustes.component';
 import { GeneralComponent } from './components/general/general.component';
 import { DatosComponent } from './components/datos/datos.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { SkeletonModule } from 'primeng/skeleton';
+import { GeneralSkeletonComponent } from './components/general/general-skeleton/general-skeleton.component';
+import { LogoComponent } from './components/general/logo/logo.component';
+import { PortadaComponent } from './components/general/portada/portada.component';
+import { NombreComponent } from './components/general/nombre/nombre.component';
+import { MessageService } from 'primeng/api';
+import { SharedGeneralService } from './services/ajuste.service';
 
 
 
@@ -32,7 +40,11 @@ import { DatosComponent } from './components/datos/datos.component';
   declarations: [
     AjustesComponent,
     GeneralComponent,
-    DatosComponent
+    DatosComponent,
+    GeneralSkeletonComponent,
+    LogoComponent,
+    PortadaComponent,
+    NombreComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +70,13 @@ import { DatosComponent } from './components/datos/datos.component';
     FileUploadModule,
     ImageCropperModule,
     InputMaskModule,
-    InputSwitchModule
-  ]
+    InputSwitchModule,
+    ProgressSpinnerModule,
+    SkeletonModule
+  ],
+  providers: [
+      SharedGeneralService,
+      MessageService
+    ]
 })
 export class AjustesModule { }
