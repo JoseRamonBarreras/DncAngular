@@ -1,0 +1,41 @@
+<div class="card">
+    <p-dialog header="Actualizar WhatsApp" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '50rem'}" (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <div class="col-6">
+                <p-toast></p-toast>
+                <form [formGroup]="whatsappForm" (ngSubmit)="guardar()">
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>WhatsApp</p-inputGroupAddon>
+                                <input type="text" pInputText formControlName="WhatsApp" />
+                            </p-inputGroup>
+                            <div *ngIf="whatsappForm.get('WhatsApp')?.invalid && whatsappForm.get('WhatsApp')?.touched"
+                                class="text-danger">
+                                Número inválido. Debe tener 10 dígitos.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button label="Cancelar" severity="secondary" (click)="cancelar()"
+                                [ngStyle]="{ 'margin-right': '5px' }" styleClass="p-button-cancelar" />
+                            <p-button type="submit" label="Guardar" severity="success" [disabled]="!whatsappForm.valid">
+                            </p-button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </p-dialog>
+</div>

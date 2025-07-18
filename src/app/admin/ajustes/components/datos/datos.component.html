@@ -1,61 +1,68 @@
 <p-card header="Datos">
 
-    <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
-        (click)="onDireccionClick()">
-        <div class="flex align-items-center gap-3">
-            <i class="pi pi-map-marker text-red-600 text-base" style="min-width: 20px;"></i>
-            <div>
-                <p class="font-bold m-0">Dirección</p>
-                <small class="text-color-secondary">Circuito Antares #123, Mexicali</small>
+    <ng-container *ngIf="isLoading; else datosGrid">
+        <app-datos-skeleton></app-datos-skeleton>
+    </ng-container>
+
+    <ng-template #datosGrid>
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+            (click)="onDireccionClick()">
+            <div class="flex align-items-center gap-3">
+                <i class="pi pi-map-marker text-red-600 text-base" style="min-width: 20px;"></i>
+                <div>
+                    <p class="font-bold m-0">Dirección</p>
+                    <small class="text-color-secondary">{{ datosCliente.direccion || 'Agrega tu dirección' }}</small>
+                </div>
+                
             </div>
         </div>
-    </div>
+        <app-direccion *ngIf="displayDireccion"></app-direccion>
 
-    <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
-        (click)="onWhatsappClick()">
-        <div class="flex align-items-center gap-3">
-            <i class="pi pi-whatsapp text-green-600 text-base" style="min-width: 20px;"></i>
-            <div>
-                <p class="font-bold m-0">WhatsApp</p>
-                <small class="text-color-secondary">+52 686 123 4567</small>
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+            (click)="onWhatsappClick()">
+            <div class="flex align-items-center gap-3">
+                <i class="pi pi-whatsapp text-green-600 text-base" style="min-width: 20px;"></i>
+                <div>
+                    <p class="font-bold m-0">WhatsApp</p>
+                    <small class="text-color-secondary">+52 {{datosCliente.whatsapp || 'Agrega tu WhatsApp'}}</small>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
-        (click)="onHorarioClick()">
-        <div class="flex align-items-center gap-3">
-            <i class="pi pi-clock text-blue-600 text-base" style="min-width: 20px;"></i>
-            <div>
-                <p class="font-bold m-0">Horario</p>
-                <small class="text-color-secondary">Lunes a Viernes · 9am – 6pm</small>
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+            (click)="onHorarioClick()">
+            <div class="flex align-items-center gap-3">
+                <i class="pi pi-clock text-blue-600 text-base" style="min-width: 20px;"></i>
+                <div>
+                    <p class="font-bold m-0">Horario</p>
+                    <small class="text-color-secondary">Activa y desactiva tus dias y horarios de apertura</small>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
-        (click)="onOpcionesEnvioClick()">
-        <div class="flex align-items-center gap-3">
-            <i class="pi pi-send text-blue-600 text-base" style="min-width: 20px;"></i>
-            <div>
-                <p class="font-bold m-0">Opciones de envío</p>
-                <small class="text-color-secondary">A domicilio, para recoger</small>
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+            (click)="onOpcionesEnvioClick()">
+            <div class="flex align-items-center gap-3">
+                <i class="pi pi-send text-blue-600 text-base" style="min-width: 20px;"></i>
+                <div>
+                    <p class="font-bold m-0">Opciones de envío</p>
+                    <small class="text-color-secondary">A domicilio, para recoger</small>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
-        (click)="onRangosEnvioClick()">
-        <div class="flex align-items-center gap-3">
-            <i class="pi pi-globe text-blue-600 text-base" style="min-width: 20px;"></i>
-            <div>
-                <p class="font-bold m-0">Rangos de envío</p>
-                <small class="text-color-secondary">Hasta 10 km sin costo</small>
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+            (click)="onRangosEnvioClick()">
+            <div class="flex align-items-center gap-3">
+                <i class="pi pi-globe text-blue-600 text-base" style="min-width: 20px;"></i>
+                <div>
+                    <p class="font-bold m-0">Rangos de envío</p>
+                    <small class="text-color-secondary">Hasta 10 km sin costo</small>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- <div
+        <!-- <div
   class="bg-primary-100 border-round-xl p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:bg-primary-200"
   (click)="onWhatsappClick()"
 >
@@ -67,4 +74,21 @@
     </div>
   </div>
 </div> -->
+    </ng-template>
+
+
+ <!-- <div class="grid">
+                <div class="col">
+                    <label class="fw-bold mb-2">Dirección de tu negocio</label>
+                    <input id="autocomplete" type="text" class="form-control mb-3" placeholder="Ingresa la dirección" />
+
+                    <div id="map" style="height: 300px; border-radius: 8px;"></div>
+                </div>
+            </div> -->
+
+
 </p-card>
+
+
+<app-whats-app *ngIf="displayWhatsapp"></app-whats-app>
+<app-horario *ngIf="displayHorario"></app-horario>

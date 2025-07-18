@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class StateGeneralService {
+export class StateDatosService {
   accion: Object = {};
 
   private accionSource = new BehaviorSubject<Object>(this.accion);
@@ -12,35 +12,34 @@ export class StateGeneralService {
 
   constructor() { }
 
-  public cancelarLogo() {
-    this.accion = { displayLogo: false }
+  public cancelarDireccion() {
+    this.accion = { displayDireccion: false }
     this.accionSource.next(this.accion);
   }
 
-  public savedLogo() {
-    this.accion = { displayLogo: false, guardado: true }
+  public savedDireccion() {
+    this.accion = { displayDireccion: false, guardado: true }
     this.accionSource.next(this.accion);
   }
 
-  public cancelarPortada() {
-    this.accion = { displayPortada: false }
+  public cancelarWhatsapp() {
+    this.accion = { displayWhatsapp: false }
     this.accionSource.next(this.accion);
   }
 
-  public savedPortada() {
-    this.accion = { displayPortada: false, guardado: true }
+  public savedWhatsapp() {
+    this.accion = { displayWhatsapp: false, guardado: true }
     this.accionSource.next(this.accion);
   }
 
-  public cancelarNombre() {
-    this.accion = { displayNombre: false }
+  public cancelarHorario() {
+    this.accion = { displayHorario: false }
     this.accionSource.next(this.accion);
   }
 
-  public savedNombre() {
-    this.accion = { displayNombre: false, guardado: true }
+  public savedHorario() {
+    this.accion = { displayHorario: false, guardado: true }
     this.accionSource.next(this.accion);
   }
-
 
 }

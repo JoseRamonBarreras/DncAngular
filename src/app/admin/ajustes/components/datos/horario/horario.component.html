@@ -1,0 +1,59 @@
+<div class="card">
+    <p-dialog header="Actualizar Horario" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '50rem'}" (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <div class="col">
+                <p-toast></p-toast>
+                <form [formGroup]="horarioForm" (ngSubmit)="guardar()">
+                    <div formArrayName="dias" class="grid">
+                        <div *ngFor="let diaCtrl of dias.controls; let i = index" [formGroupName]="i"
+                            class="col-12 md:col-6">
+                            <div class="p-3 border-round surface-card shadow-1">
+                                <div class="flex align-items-center justify-content-between mb-2">
+                                    <div class="font-bold">{{ getNombreDia(i) }}</div>
+                                    <p-inputSwitch formControlName="activo" />
+                                </div>
+
+                                <div class="grid formgrid">
+                                    <div class="col-6">
+                                        <label class="block mb-1 text-sm">Hora inicio</label>
+                                        <p-dropdown formControlName="horaInicio" [options]="horas" optionLabel="label"
+                                            optionValue="value" class="w-full"
+                                             />
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label class="block mb-1 text-sm">Hora fin</label>
+                                        <p-dropdown formControlName="horaFin" [options]="horas" optionLabel="label"
+                                            optionValue="value" class="w-full"
+                                            />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button label="Cancelar" severity="secondary"
+                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }"
+                                styleClass="p-button-cancelar" />
+                            <p-button type="submit" label="Guardar"
+                                severity="success" [disabled]="!horarioForm.valid">
+                            </p-button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+
+
+
+            </div>
+
+
+        </div>
+    </p-dialog>
+</div>

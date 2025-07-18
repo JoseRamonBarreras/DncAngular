@@ -33,6 +33,12 @@ import { PortadaComponent } from './components/general/portada/portada.component
 import { NombreComponent } from './components/general/nombre/nombre.component';
 import { MessageService } from 'primeng/api';
 import { SharedGeneralService } from './services/ajuste.service';
+import { DatosSkeletonComponent } from './components/datos/datos-skeleton/datos-skeleton.component';
+import { DireccionComponent } from './components/datos/direccion/direccion.component';
+import { WhatsAppComponent } from './components/datos/whats-app/whats-app.component';
+import { SharedDatosService } from './services/datos.service';
+import { SidebarModule } from 'primeng/sidebar';
+import { HorarioComponent } from './components/datos/horario/horario.component';
 
 
 
@@ -44,7 +50,11 @@ import { SharedGeneralService } from './services/ajuste.service';
     GeneralSkeletonComponent,
     LogoComponent,
     PortadaComponent,
-    NombreComponent
+    NombreComponent,
+    DatosSkeletonComponent,
+    DireccionComponent,
+    WhatsAppComponent,
+    HorarioComponent
   ],
   imports: [
     CommonModule,
@@ -72,10 +82,12 @@ import { SharedGeneralService } from './services/ajuste.service';
     InputMaskModule,
     InputSwitchModule,
     ProgressSpinnerModule,
-    SkeletonModule
+    SkeletonModule,
+    SidebarModule
   ],
   providers: [
       SharedGeneralService,
+      SharedDatosService,
       MessageService
     ]
 })
