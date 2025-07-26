@@ -42,4 +42,14 @@ export class StateDatosService {
     this.accionSource.next(this.accion);
   }
 
+  public cancelarEnvio() {
+    this.accion = { displayEnvio: false }
+    this.accionSource.next(this.accion);
+  }
+
+  public savedEnvio() {
+    this.accion = { displayEnvio: false, guardado: true }
+    this.accionSource.next(this.accion);
+  }
+
 }

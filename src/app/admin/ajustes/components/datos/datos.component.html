@@ -50,45 +50,11 @@
                 </div>
             </div>
         </div>
-
-        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
-            (click)="onRangosEnvioClick()">
-            <div class="flex align-items-center gap-3">
-                <i class="pi pi-globe text-blue-600 text-base" style="min-width: 20px;"></i>
-                <div>
-                    <p class="font-bold m-0">Rangos de envío</p>
-                    <small class="text-color-secondary">Hasta 10 km sin costo</small>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div
-  class="bg-primary-100 border-round-xl p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:bg-primary-200"
-  (click)="onWhatsappClick()"
->
-  <div class="flex align-items-center gap-3">
-    <i class="pi pi-whatsapp text-primary text-lg"></i>
-    <div>
-      <p class="font-bold text-primary m-0">WhatsApp</p>
-      <small class="text-primary">+52 686 123 4567</small>
-    </div>
-  </div>
-</div> -->
     </ng-template>
-
-
- <!-- <div class="grid">
-                <div class="col">
-                    <label class="fw-bold mb-2">Dirección de tu negocio</label>
-                    <input id="autocomplete" type="text" class="form-control mb-3" placeholder="Ingresa la dirección" />
-
-                    <div id="map" style="height: 300px; border-radius: 8px;"></div>
-                </div>
-            </div> -->
-
 
 </p-card>
 
 
 <app-whats-app *ngIf="displayWhatsapp"></app-whats-app>
 <app-horario *ngIf="displayHorario"></app-horario>
+<app-envio *ngIf="displayEnvio"></app-envio>

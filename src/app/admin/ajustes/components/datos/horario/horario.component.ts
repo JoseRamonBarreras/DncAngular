@@ -5,6 +5,7 @@ import { SharedDatosService } from '../../../services/datos.service';
 import { StateDatosService } from '../../../services/state-datos.service';
 import { HorarioService } from '../../../services/horario.service';
 import { HorarioModel } from '../../../models/horario.model';
+import Swal from 'sweetalert2';
 
 type DialogPosition = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
 
@@ -124,5 +125,17 @@ export class HorarioComponent {
     this.loading = true;
     const data = this.horarioForm.value.dias;
     console.log('Guardando horarios', data);
+    this.horarioService.guardarHorario(Number(localStorage.getItem('cliente_id')), data).subscribe(resp => {
+      console.log('FromBackend', resp);
+      this.visible = false;
+      this.stateDatos.savedHorario();
+    }, error => {
+      console.log('error', error);
+      this.visible = false;
+      this.stateDatos.cancelarHorario();
+      Swal.fire({ title: 'Error al guardar', text: '', icon: 'warning' });
+
+
+    });
   }
 }

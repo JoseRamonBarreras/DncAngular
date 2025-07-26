@@ -23,6 +23,7 @@ export class DatosComponent {
   displayDireccion: boolean = false;
   displayWhatsapp: boolean = false;
   displayHorario: boolean = false;
+  displayEnvio: boolean = false;
 
   private map!: google.maps.Map;
   private marker!: google.maps.Marker;
@@ -50,6 +51,7 @@ export class DatosComponent {
       this.displayDireccion = accion.displayDireccion;
       this.displayWhatsapp = accion.displayWhatsapp;
       this.displayHorario = accion.displayHorario;
+      this.displayEnvio = accion.displayEnvio;
       if (accion.guardado == true) {
         this.getDatosCliente();
         this.messageService.add({
@@ -88,7 +90,7 @@ export class DatosComponent {
   }
 
   onOpcionesEnvioClick() {
-    // Configurar opciones de envío
+    this.displayEnvio = true;
   }
 
   onRangosEnvioClick() {

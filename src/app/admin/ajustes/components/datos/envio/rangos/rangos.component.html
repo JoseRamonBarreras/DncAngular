@@ -1,0 +1,55 @@
+<div class="card">
+    <p-dialog header="Rangos" [modal]="true" [(visible)]="visible" [position]="position" [style]="{ width: '65rem'}"
+        (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <div class="col">
+                <p-toast></p-toast>
+                <form [formGroup]="rangosForm" (ngSubmit)="guardar()">
+                    <div formArrayName="rangos">
+                        <div *ngFor="let grupo of rangos.controls; let i = index" [formGroupName]="i"
+                            class="mb-3 p-3 border-round surface-100">
+
+                            <div class="grid items-end">
+                                <div class="col">
+                                    <label class="mb-1 text-sm font-semibold">Desde (km)</label>
+                                    <input pInputText type="number" formControlName="km_min"
+                                        class="p-inputtext-sm w-full" readonly/>
+                                </div>
+                                <div class="col">
+                                    <label class="mb-1 text-sm font-semibold">Hasta (km)</label>
+                                    <input pInputText type="number" formControlName="km_max"
+                                        class="p-inputtext-sm w-full" />
+                                </div>
+                                <div class="col">
+                                    <label class="mb-1 text-sm font-semibold">Costo</label>
+                                    <input pInputText type="number" formControlName="precio"
+                                        class="p-inputtext-sm w-full" />
+                                </div>
+                                <div class="col flex items-end">
+                                    <p-button icon="pi pi-trash" label="Eliminar" severity="danger"
+                                        (click)="removeRango(i)" styleClass="p-button-sm text-xs py-1 px-2"
+                                        [style]="{ 'font-size': '0.7rem', 'height': '1.75rem' }">
+                                    </p-button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <p-button label="Agregar" icon="pi pi-plus" (click)="addRango()"
+                        styleClass="p-button-sm p-button-success text-xs py-1 px-2"
+                        [style]="{ 'font-size': '0.7rem', 'height': '1.75rem' }">
+                    </p-button>
+
+
+                    <div class="flex justify-content-end mt-4">
+                        <p-button label="Cancelar" severity="secondary" (click)="cancelar()" class="mr-2"></p-button>
+                        <p-button label="Guardar" type="submit" [disabled]="rangosForm.invalid"
+                            severity="success"></p-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-dialog>
+</div>

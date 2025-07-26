@@ -39,6 +39,10 @@ import { WhatsAppComponent } from './components/datos/whats-app/whats-app.compon
 import { SharedDatosService } from './services/datos.service';
 import { SidebarModule } from 'primeng/sidebar';
 import { HorarioComponent } from './components/datos/horario/horario.component';
+import { EnvioComponent } from './components/datos/envio/envio.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RangosComponent } from './components/datos/envio/rangos/rangos.component';
 
 
 
@@ -54,7 +58,9 @@ import { HorarioComponent } from './components/datos/horario/horario.component';
     DatosSkeletonComponent,
     DireccionComponent,
     WhatsAppComponent,
-    HorarioComponent
+    HorarioComponent,
+    EnvioComponent,
+    RangosComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +89,9 @@ import { HorarioComponent } from './components/datos/horario/horario.component';
     InputSwitchModule,
     ProgressSpinnerModule,
     SkeletonModule,
-    SidebarModule
+    SidebarModule,
+    ToggleButtonModule,
+    RadioButtonModule
   ],
   providers: [
       SharedGeneralService,

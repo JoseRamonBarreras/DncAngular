@@ -1,0 +1,95 @@
+<div class="card">
+    <p-dialog header="Opciones de envío" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '50rem'}" (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <div class="col">
+                <p-toast></p-toast>
+                <form [formGroup]="envioForm" (ngSubmit)="guardar()">
+                    <div class="grid" style="margin-top: 10px;">
+                        <div class="col" style="border: 1px solid #d0d0d0; padding: 10px; border-radius: 5px;">
+                            <div class="flex items-center justify-between mb-2 gap-2">
+                                <p-inputSwitch formControlName="EntregaDomicilio"></p-inputSwitch>
+                                <div class="font-bold">Entrega a domicilio</div>
+                            </div>
+
+                            <div *ngIf="entregaDomicilioActiva" class="flex flex-col" style="margin-top: 15px;">
+                                <div class="flex align-items-center" style="margin-right: 15px;">
+                                    <p-radioButton [value]="1" formControlName="TipoCosto" inputId="TipoCosto1" />
+                                    <label for="TipoCosto1" class="ml-2">
+                                        Costo fijo
+                                    </label>
+                                </div>
+
+                                <div class="flex align-items-center">
+                                    <p-radioButton [value]="2" formControlName="TipoCosto" inputId="TipoCosto2" />
+                                    <label for="TipoCosto2" class="ml-2">
+                                        Costo por km
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div *ngIf="envioForm.get('TipoCosto')?.value == 1" class="flex flex-col"
+                                style="margin-top: 10px;">
+                                <input type="text" pInputText formControlName="PrecioFijo" />
+                            </div>
+
+                            <div *ngIf="envioForm.get('TipoCosto')?.value == 2" class="flex flex-col"
+                                style="margin-top: 10px;">
+
+                                <div *ngIf="rangos.length === 0">
+                                    <p>No hay rangos de entrega</p>
+                                    <p-button label="Crear rangos" [link]="true" (click)="actualizarRangos()"/>
+                                </div>
+
+                                <div *ngIf="rangos.length > 0" class="space-y-4">
+                                    <div *ngFor="let rango of rangos" class="grid grid-cols-3 gap-4 items-center" style="margin: 10px;">
+                                        <div>
+                                            <strong>Desde</strong><br />
+                                            {{ rango.km_min }} km
+                                        </div>
+                                        <div>
+                                            <strong>Hasta</strong><br />
+                                            {{ rango.km_max }} km
+                                        </div>
+                                        <div>
+                                            <strong>Costo</strong><br />
+                                            {{ rango.precio | currency:'MXN':'symbol':'1.2-2' }}
+                                        </div>
+                                    </div>
+
+                                    <p-button label="Editar rangos" [link]="true" (click)="actualizarRangos()"/>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="grid" style="margin-top: 10px;">
+                        <div class="col" style="border: 1px solid #d0d0d0; padding: 10px; border-radius: 5px;">
+                            <div class="flex items-center justify-between mb-2 gap-2">
+                                <p-inputSwitch formControlName="RecogerSucursal"></p-inputSwitch>
+                                <div class="font-bold">Recoger en sucursal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button label="Cancelar" severity="secondary" (click)="cancelar()"
+                                [ngStyle]="{ 'margin-right': '5px' }" styleClass="p-button-cancelar" />
+                            <p-button type="submit" label="Guardar" severity="success" [disabled]="!envioForm.valid">
+                            </p-button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-dialog>
+</div>
+
+<app-rangos *ngIf="displayRangos"></app-rangos>

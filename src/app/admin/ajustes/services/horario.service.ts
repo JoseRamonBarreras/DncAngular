@@ -14,8 +14,8 @@ export class HorarioService {
     return this.httpService.get(`${this.end_point}/${id}`);
   }
 
-  // guardarDireccion(datosCliente: DatosClienteModel): Observable<any> {
-  //   // let object = {ClienteId: clienteId, Nombre: nombre}
-  //   return this.httpService.post(this.end_point + '/direccion', datosCliente);
-  // }
+  guardarHorario(clienteId: number, horarios: any): Observable<any> {
+    let object = {ClienteId: clienteId, horarios: horarios}
+    return this.httpService.post(this.end_point + '/horario', object);
+  }
 }
