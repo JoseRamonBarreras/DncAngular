@@ -29,6 +29,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { MessageService } from 'primeng/api';
 import { SharedPuestoService } from './services/puesto.service';
 import { CrearPuestoComponent } from './components/puestos/crear-puesto/crear-puesto.component';
+import { SharedUsuarioEmpleadoService } from './services/usuario-empleado.service';
+import { CrearEmpleadoComponent } from './components/usuarios/crear-empleado/crear-empleado.component';
 
 
 
@@ -37,7 +39,8 @@ import { CrearPuestoComponent } from './components/puestos/crear-puesto/crear-pu
     PuestosConfigComponent,
     PuestosComponent,
     UsuariosComponent,
-    CrearPuestoComponent
+    CrearPuestoComponent,
+    CrearEmpleadoComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +71,8 @@ import { CrearPuestoComponent } from './components/puestos/crear-puesto/crear-pu
   ],
   providers: [
     SharedPuestoService,
-    MessageService
+    MessageService,
+    SharedUsuarioEmpleadoService
   ]
 })
 export class PuestosModule { }

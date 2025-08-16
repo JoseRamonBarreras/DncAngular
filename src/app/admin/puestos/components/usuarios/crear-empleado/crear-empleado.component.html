@@ -1,0 +1,81 @@
+<div class="card">
+    <p-dialog header="Usuario" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '50rem', minHeight: '30rem'}" (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <div class="col-12">
+                <p-toast></p-toast>
+                <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <ng-container *ngIf="loadingDatos; else nombreField">
+                                <p-skeleton height="2rem" width="100%"></p-skeleton>
+                            </ng-container>
+                            <ng-template #nombreField>
+                                <p-inputGroup>
+                                    <p-inputGroupAddon>Nombre</p-inputGroupAddon>
+                                    <input type="text" pInputText placeholder="Nombre" formControlName="Nombre" />
+                                </p-inputGroup>
+                            </ng-template>
+                        </div>
+                        <div class="col">
+                            <ng-container *ngIf="loadingDatos; else puestoField">
+                                <p-skeleton height="2rem" width="100%"></p-skeleton>
+                            </ng-container>
+                            <ng-template #puestoField>
+                                <div class="p-field">
+                                <label for="puesto">Puesto</label>
+                                <p-dropdown id="puesto" [options]="puestos" optionLabel="nombre" optionValue="id"
+                                    formControlName="Puesto" placeholder="Selecciona una puesto">
+                                </p-dropdown>
+                            </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="col">
+                            <ng-container *ngIf="loadingDatos; else correoField">
+                                <p-skeleton height="6rem" width="100%"></p-skeleton>
+                            </ng-container>
+                            <ng-template #correoField>
+                                <p-inputGroup>
+                                    <p-inputGroupAddon>Correo</p-inputGroupAddon>
+                                    <input type="text" pInputText formControlName="Correo" />
+                                </p-inputGroup>
+                            </ng-template>
+                        </div>
+                        <div class="col" *ngIf="!isEditMode">
+                            <ng-container *ngIf="loadingDatos; else passwordField">
+                                <p-skeleton height="6rem" width="100%"></p-skeleton>
+                            </ng-container>
+                            <ng-template #passwordField>
+                                <p-inputGroup>
+                                    <p-inputGroupAddon>Password</p-inputGroupAddon>
+                                    <input type="text" pInputText formControlName="Password" />
+                                </p-inputGroup>
+                            </ng-template>
+                        </div>
+                    </div>
+
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button [label]="isEditMode ? 'Cerrar' : 'Cancelar'" severity="secondary"
+                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }"
+                                styleClass="p-button-cancelar" />
+                            <p-button type="submit" [label]="isEditMode ? 'Actualizar' : 'Guardar'"
+                                [severity]="isEditMode ? 'primary' : 'success'" [disabled]="!usuarioForm.valid">
+                            </p-button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-dialog>
+</div>

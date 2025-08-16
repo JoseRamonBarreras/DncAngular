@@ -87,7 +87,7 @@ export class CrearPuestoComponent {
     this.isEditMode = false;
   }
 
-  showDialog(position: DialogPosition = 'left'): void {
+  showDialog(position: DialogPosition = 'topleft'): void {
     this.position = position;
     this.visible = true;
   }
