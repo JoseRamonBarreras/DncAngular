@@ -16,6 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./ajustes/ajustes.module').then(m => m.AjustesModule) 
   },
   { 
+    path: 'puestos', 
+    canActivate: [RoleGuard],
+    data: { acceso: "PUESTOS" },
+    loadChildren: () => import('./puestos/puestos.module').then(m => m.PuestosModule) 
+  },
+  { 
     path: 'usuarios', 
     canActivate: [RoleGuard],
     data: { acceso: "SISTEMAS" },

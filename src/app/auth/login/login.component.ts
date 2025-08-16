@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-     this.logo = "./img/pedidosexpres.png";
-     //this.catDog = "./img/dog-cat-uno.jpg";
+     this.logo = "./img/avanzarh.png";
+     this.catDog = "./img/imagelogin.jpg";
     if (localStorage.getItem('token') != null) {
       this.redirect();
     }

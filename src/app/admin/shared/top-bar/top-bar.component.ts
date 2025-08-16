@@ -36,7 +36,7 @@ export class TopBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logo = "./img/pedidosexpres.png";
+    this.logo = "./img/avanzarh.png";
     this.menuItems = this.getMenu();
     this.seccionName.current.subscribe(titulo => {
       console.log('Li', titulo);
@@ -59,9 +59,9 @@ export class TopBarComponent implements OnInit {
         command: () => this.sidebarVisible = false
       },
       {
-        label: 'Mascotas QR',
-        icon: 'pi pi-qrcode',
-        routerLink: 'mascotas',
+        label: 'Puestos',
+        icon: 'pi pi-id-card',
+        routerLink: 'puestos',
         command: () => this.sidebarVisible = false
       },
       // {

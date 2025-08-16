@@ -1,0 +1,59 @@
+<div class="card">
+    <p-dialog header="Puesto" [modal]="true" [(visible)]="visible" [position]="position"
+        [style]="{ width: '50rem', minHeight: '30rem'}" (onHide)="cancelar()" styleClass="custom-dialog">
+
+        <div class="grid">
+            <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+            <div class="col-12">
+                <p-toast></p-toast>
+                <form [formGroup]="puestoForm" (ngSubmit)="guardar()">
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col">
+                            <ng-container *ngIf="loadingDatos; else nombreField">
+                                <p-skeleton height="2rem" width="100%"></p-skeleton>
+                            </ng-container>
+                            <ng-template #nombreField>
+                                <p-inputGroup>
+                                    <p-inputGroupAddon>Nombre</p-inputGroupAddon>
+                                    <input type="text" pInputText placeholder="Nombre" formControlName="Nombre" />
+                                </p-inputGroup>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div class="grid">
+                        <div class="col">
+                            <ng-container *ngIf="loadingDatos; else descripcionField">
+                                <p-skeleton height="6rem" width="100%"></p-skeleton>
+                            </ng-container>
+                            <ng-template #descripcionField>
+                                <p-inputGroup>
+                                    <p-inputGroupAddon>Descripcion</p-inputGroupAddon>
+                                    <textarea rows="4" cols="60" pInputTextarea
+                                        formControlName="Descripcion"></textarea>
+                                </p-inputGroup>
+                            </ng-template>
+                        </div>
+                    </div>
+
+
+                    <div class="grid" style="margin-bottom: 10px;">
+                        <div class="col-12" style="display: flex; justify-content: flex-end;">
+                            <p-button [label]="isEditMode ? 'Cerrar' : 'Cancelar'" severity="secondary"
+                                (click)="cancelar()" [ngStyle]="{ 'margin-right': '5px' }"
+                                styleClass="p-button-cancelar" />
+                            <p-button type="submit" [label]="isEditMode ? 'Actualizar' : 'Guardar'"
+                                [severity]="isEditMode ? 'primary' : 'success'" [disabled]="!puestoForm.valid">
+                            </p-button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;" *ngIf="loading">
+                        <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-dialog>
+</div>

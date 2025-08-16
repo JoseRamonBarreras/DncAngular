@@ -94,9 +94,9 @@ import { RangosComponent } from './components/datos/envio/rangos/rangos.componen
     RadioButtonModule
   ],
   providers: [
-      SharedGeneralService,
-      SharedDatosService,
-      MessageService
-    ]
+    SharedGeneralService,
+    SharedDatosService,
+    MessageService
+  ]
 })
 export class AjustesModule { }

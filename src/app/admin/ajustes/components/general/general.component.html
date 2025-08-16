@@ -8,7 +8,7 @@
     <div class="grid">
       <div class="col-12 md:col-4">
         <div
-          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200"
           (click)="subirLogo()">
           <div class="flex align-items-center gap-3">
             <!-- <img [src]="logoUrl || logoPlaceholder" alt="Logo Preview" class="border-round"
@@ -27,7 +27,7 @@
 
       <div class="col-12 md:col-4">
         <div
-          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200"
           (click)="subirPortada()">
           <div class="flex align-items-center gap-3">
             <img [src]="generalCliente.portada_url ? (negocioImageUrl + generalCliente.portada_url) : portadaPlaceholder" alt="Portada Preview" class="border-round"
@@ -42,7 +42,7 @@
 
       <div class="col-12 md:col-4" *ngIf="generalCliente">
         <div
-          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+          class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200"
           (click)="editarNombre()">
           <div class="flex align-items-center gap-3">
             <div class="border-round flex justify-content-center align-items-center"

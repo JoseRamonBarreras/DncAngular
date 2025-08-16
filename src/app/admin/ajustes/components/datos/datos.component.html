@@ -5,7 +5,7 @@
     </ng-container>
 
     <ng-template #datosGrid>
-        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200"
             (click)="onDireccionClick()">
             <div class="flex align-items-center gap-3">
                 <i class="pi pi-map-marker text-red-600 text-base" style="min-width: 20px;"></i>
@@ -18,7 +18,7 @@
         </div>
         <app-direccion *ngIf="displayDireccion"></app-direccion>
 
-        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200"
             (click)="onWhatsappClick()">
             <div class="flex align-items-center gap-3">
                 <i class="pi pi-whatsapp text-green-600 text-base" style="min-width: 20px;"></i>
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+        <!-- <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
             (click)="onHorarioClick()">
             <div class="flex align-items-center gap-3">
                 <i class="pi pi-clock text-blue-600 text-base" style="min-width: 20px;"></i>
@@ -38,9 +38,9 @@
                     <small class="text-color-secondary">Activa y desactiva tus dias y horarios de apertura</small>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
+        <!-- <div class="surface-card border-round shadow-1 p-3 mb-3 cursor-pointer transition-all transition-duration-200 hover:shadow-3 hover:surface-200 borde-negro"
             (click)="onOpcionesEnvioClick()">
             <div class="flex align-items-center gap-3">
                 <i class="pi pi-send text-blue-600 text-base" style="min-width: 20px;"></i>
@@ -49,7 +49,7 @@
                     <small class="text-color-secondary">A domicilio, para recoger</small>
                 </div>
             </div>
-        </div>
+        </div> -->
     </ng-template>
 
 </p-card>
