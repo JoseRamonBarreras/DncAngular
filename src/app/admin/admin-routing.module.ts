@@ -22,6 +22,12 @@ const routes: Routes = [
     loadChildren: () => import('./puestos/puestos.module').then(m => m.PuestosModule) 
   },
   { 
+    path: 'encuestas', 
+    canActivate: [RoleGuard],
+    data: { acceso: "ENCUESTAS" },
+    loadChildren: () => import('./encuestas/encuestas.module').then(m => m.EncuestasModule) 
+  },
+  { 
     path: 'usuarios', 
     canActivate: [RoleGuard],
     data: { acceso: "SISTEMAS" },

@@ -64,6 +64,12 @@ export class TopBarComponent implements OnInit {
         routerLink: 'puestos',
         command: () => this.sidebarVisible = false
       },
+      {
+        label: 'Encuestas',
+        icon: 'pi pi-book',
+        routerLink: 'encuestas',
+        command: () => this.sidebarVisible = false
+      },
       // {
       //   label: 'Mantenimiento',
       //   icon: 'pi pi-cog',
